@@ -1,0 +1,28 @@
+<?php
+return [
+    'create' => 'Créer un nouvel article',
+    'form' => [
+        'name' => 'Nom',
+        'name_placeholder' => 'Nom de l\'article (Maximum :c caractères)',
+        'description' => 'Description',
+        'description_placeholder' => 'Bref descriptif de l\'article (Maximum :c caractères)',
+        'categories' => 'Catégories',
+        'tags' => 'Étiquettes',
+        'tags_placeholder' => 'Étiquettes',
+        'content' => 'Contenu',
+        'is_featured' => 'En vedette ?',
+        'note' => 'Contenu de la note',
+        'format_type' => 'Format',
+    ],
+    'cannot_delete' => 'L\'article n\'a pas pu être supprimé',
+    'post_deleted' => 'Article supprimé',
+    'posts' => 'Articles',
+    'post' => 'Article',
+    'edit_this_post' => 'Modifier cet article',
+    'no_new_post_now' => 'Il n\'y a pas de nouvel article pour le moment !',
+    'menu_name' => 'Articles',
+    'widget_posts_recent' => 'Articles récents',
+    'categories' => 'Catégories',
+    'category' => 'Catégorie',
+    'author' => 'Auteur',
+];

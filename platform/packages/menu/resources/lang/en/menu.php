@@ -1,0 +1,28 @@
+<?php
+
+return [
+    'name' => 'Menus',
+    'key_name' => 'Nom du menu (clé : :key)',
+    'basic_info' => 'Informations de base',
+    'add_to_menu' => 'Ajouter au menu',
+    'custom_link' => 'Lien personnalisé',
+    'add_link' => 'Ajouter un lien',
+    'structure' => 'Structure du menu',
+    'remove' => 'Supprimer',
+    'cancel' => 'Annuler',
+    'title' => 'Titre',
+    'icon' => 'Icône',
+    'url' => 'URL',
+    'target' => 'Cible',
+    'css_class' => 'Classe CSS',
+    'self_open_link' => 'Ouvrir le lien directement',
+    'blank_open_link' => 'Ouvrir le lien dans un nouvel onglet',
+    'create' => 'Créer un menu',
+    'menu_settings' => 'Paramètres du menu',
+    'display_location' => 'Emplacement d\'affichage',
+    'title_placeholder' => 'Titre',
+    'icon_placeholder' => 'Icône',
+    'url_placeholder' => 'URL',
+    'css_class_placeholder' => 'Classe CSS',
+    'menu_id' => 'ID du menu',
+];
