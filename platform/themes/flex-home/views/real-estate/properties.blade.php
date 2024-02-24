@@ -5,7 +5,3 @@
     'ajaxUrl' => $ajaxUrl ?? null,
     'actionUrl' => $actionUrl ?? null,
 ]) !!}
-
-@php
-  dd($properties);
-@endphp

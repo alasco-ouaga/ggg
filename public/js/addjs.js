@@ -160,6 +160,7 @@ $(document).ready(function () {
         const category_id =  document.getElementById("withclick_category_id_input").value;
         console.log("type : " + type)
         console.log("city : " + city)
+        console.log("category_id : " + category_id)
         console.log("l'identifiant du client est : " + custumer_id)
 
         if(type != ""){

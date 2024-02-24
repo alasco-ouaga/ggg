@@ -96,6 +96,48 @@ class CitySeeder extends Seeder
                 "is_default" => false,
                 "status" => "published",
             ],
+
+            // Region des haut bassins
+            [
+                "name" => "Bobo-Dioulasso",
+                "state_id" => 2,
+                "country_id" => 1,
+                "order" => 0,
+                "is_default" => false,
+                "status" => "published",
+            ],
+            [
+                "name" => "Orodara",
+                "state_id" => 2,
+                "country_id" => 1,
+                "order" => 1,
+                "is_default" => false,
+                "status" => "published",
+            ],
+            [
+                "name" => "Dédougou",
+                "state_id" => 2,
+                "country_id" => 1,
+                "order" => 2,
+                "is_default" => false,
+                "status" => "published",
+            ],
+            [
+                "name" => "Koudougou",
+                "state_id" => 3,
+                "country_id" => 1,
+                "order" => 2,
+                "is_default" => false,
+                "status" => "published",
+            ],
+            [
+                "name" => "Gaoua",
+                "state_id" => 4,
+                "country_id" => 1,
+                "order" => 2,
+                "is_default" => false,
+                "status" => "published",
+            ],
         ];
 
         City::insert($cities);

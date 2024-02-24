@@ -1,4 +1,4 @@
-<!-- retrouveIndexChatClientAvecAgent -->
+<!-- findAfficherFormChatParMail -->
 <form action="{{ route('public.send.consult') }}" method="post" id="contact-form" class="generic-form">
     @csrf
     <input type="hidden" value="{{ $type }}" name="type">

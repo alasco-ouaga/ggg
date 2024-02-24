@@ -24,6 +24,27 @@ class StateSeeder extends Seeder
                     "order" => 1,
                 ],
                 [
+                    "name" => "Hauts-Bassins",
+                    "country_id" => 1,
+                    "is_default" => false,
+                    "status" => "published",
+                    "order" => 0,
+                ],
+                [
+                    "name" => "Centre-Ouest",
+                    "country_id" => 1,
+                    "is_default" => false,
+                    "status" => "published",
+                    "order" => 0,
+                ],
+                [
+                    "name" => "Sud-Ouest",
+                    "country_id" => 1,
+                    "is_default" => false,
+                    "status" => "published",
+                    "order" => 0,
+                ],
+                [
                     "name" => "Boucle du Mouhoun",
                     "country_id" => 1,
                     "is_default" => false,
@@ -51,13 +72,7 @@ class StateSeeder extends Seeder
                     "status" => "published",
                     "order" => 0,
                 ],
-                [
-                    "name" => "Centre-Ouest",
-                    "country_id" => 1,
-                    "is_default" => false,
-                    "status" => "published",
-                    "order" => 0,
-                ],
+                
                 [
                     "name" => "Centre-Sud",
                     "country_id" => 1,
@@ -67,13 +82,6 @@ class StateSeeder extends Seeder
                 ],
                 [
                     "name" => "Est",
-                    "country_id" => 1,
-                    "is_default" => false,
-                    "status" => "published",
-                    "order" => 0,
-                ],
-                [
-                    "name" => "Hauts-Bassins",
                     "country_id" => 1,
                     "is_default" => false,
                     "status" => "published",
@@ -100,13 +108,7 @@ class StateSeeder extends Seeder
                     "status" => "published",
                     "order" => 0,
                 ],
-                [
-                    "name" => "Sud-Ouest",
-                    "country_id" => 1,
-                    "is_default" => false,
-                    "status" => "published",
-                    "order" => 0,
-                ],
+               
             ];
 
             State::insert($regions);

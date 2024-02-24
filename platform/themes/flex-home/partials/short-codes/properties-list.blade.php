@@ -24,18 +24,25 @@
     <div class="container-fluid w90 padtop30 mt-4">
         <div class="projecthome fst-italic" style="font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;">
             @if($properties->count() == 0 && ! auth("account")->user())
-                <div class="container text-lg p-4 " > 
+                <div class="row text-lg p-4 border" >
+                    <div class="container">
                     <div class="row text-center">
+                        <div class="container text-center">
                         <span class="text-danger text-center ml-2 fst-italic fw-bold" style="color: red;" >La propriétés recherchée est indisponible . Connectez vous pour effectuer une recherche programmée</span> <br>
+                        </div>
                     </div>
-                    <div class="row ">
-                        <form action="{{ route('public.account.register') }}" method="get">
-                            <button class="btn btn-primary m-2">S'inscrire </button>
-                        </form>
-                        <form action="{{ route('public.account.login') }}" method="get">
-                            <button class="btn btn-primary m-2">Se connecter </button>
-                        </form>
+                    <div class="row mt-2">
+                        <div class="container text-center ">
+                            <a href="{{ route('public.account.register') }}" class="btn btn-primary">
+                                S'inscrire
+                            </a>
+                            <a href="{{ route('public.account.login') }}" class="btn btn-primary">
+                                Se connecter 
+                            </a>
+                        </div>
                     </div>
+                    </div>
+                    
                 </div>
             @endif
 

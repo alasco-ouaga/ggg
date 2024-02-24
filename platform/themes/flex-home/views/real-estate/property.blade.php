@@ -260,16 +260,19 @@
                                         <p><span class="fas fa-arrow-circle-right me-1"></span> <a href="{{ route('public.agent', $author->username) }}">{{ __('More properties by this agent') }}</a></p>
                                     @endif
                                 </div>
-                                <a href="https://wa.me/74068783?text=Bonjour" target="_blank">
-                                    <button class="btn btn-success btn-sm mt-3">Echange sur whatsApp</button>
+                                @php 
+                                    $link = "Bonjour cher Agent immobilier,Je suis interressé par une de vos publications de propriétés sur rgimmobilier.La propriété est visitable sur ce lien ci-dessous.Merci de repondre"."\n".asset("/properties/".$property->slug);
+                                @endphp
+                                <!-- findAfficherChatParwhatsapp -->
+                                <a href="https://api.whatsapp.com/send?phone=22674068783&text={{ urlencode($link) }}" target="_blank">
+                                    <button class="btn btn-success mt-3">Echanger sur WhatsApp</button>
                                 </a>
+                               
                             </div>
                         </div>
                     </div>
                 @endif
-                <div class="boxright p-3">
-                    {!! Theme::partial('consult-form', ['type' => 'property', 'data' => $property]) !!}
-                </div>
+                <!-- findAfficherChatParEmail -->
             </div>
         </div>
         <br>

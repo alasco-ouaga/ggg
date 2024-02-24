@@ -39,11 +39,9 @@ class programingController extends Controller
     }
 
     public function propertyProgramingSave(Request $request) {
+
         $category_name = null;
         $success = true;
-        if($request->category_id != null){
-            $category_name = ModelsCategory::find($request->category_id)->name;
-        }
         if($request->custumer_id != null){
             $custumer = Account::find($request->custumer_id);
             if($custumer == null){
