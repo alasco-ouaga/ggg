@@ -211,14 +211,14 @@
 <body class="">
 
     <div class="container text-uppercase text-lg fw-bold fst-italic p-1">
-        rg immobilier : Demande acceptee
+        rg immobilier : Demande accordée avec succès
     </div>
     
     <div class="container text-uppercase text-lg p-1 mb-1"><hr></div>
 
     <div class="container bg-white">
         <div class="row">
-            Cher(e) {{$user->last_name}}-{{$user->first_name}} ,
+            Cher(e) {{$last_name}}-{{$first_name}} ,
         </div>
         <div class="row text-align-justify p-3">
             Nous sommes ravis de vous informer que votre compte client a été mis à jour, et vous êtes désormais enregistré(e) en tant qu'agent immobilier auprès de notre entreprise.

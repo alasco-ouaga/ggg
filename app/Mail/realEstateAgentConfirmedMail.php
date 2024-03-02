@@ -12,11 +12,13 @@ use Illuminate\Queue\SerializesModels;
 class realEstateAgentConfirmedMail extends Mailable
 {
     use Queueable, SerializesModels;
-    public $user = "";
+    public $first_name = "";
+    public $last_name = "";
 
     public function __construct($user)
     {
-        $this->user = $user;
+        $this->first_name = $user->first_name;
+        $this->last_name = $user->last_name;
     }
 
     public function envelope()

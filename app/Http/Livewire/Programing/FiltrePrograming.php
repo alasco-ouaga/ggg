@@ -13,7 +13,7 @@ class FiltrePrograming extends Component
     public $parametter = "";
     public $type="";
     public $programings;
-    public $programingscopies=[];
+    public $programingscopies;
 
     public function mount(){
         $this->programings = ProgramingSearch::orderBy('created_at', 'desc')->where("find",false)->take(5)->latest()->get();
@@ -22,12 +22,14 @@ class FiltrePrograming extends Component
 
     public function render()
     {
+
         if($this->quantity != 0){
             $this->programings = ProgramingSearch::orderBy('created_at', 'desc')->where("find",false)->take($this->quantity)->latest()->get();
             $this->programingscopies = $this->programings;
         }
 
         if($this->type != ""){
+            $this->programings = $this->programingscopies;
             $programinglimited = $this->programings->filter(function ($programing) {
                 return stripos(strtolower($programing->type_name), strtolower($this->type)) !== false;
             });

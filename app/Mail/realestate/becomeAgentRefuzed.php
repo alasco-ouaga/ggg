@@ -26,7 +26,7 @@ class becomeAgentRefuzed extends Mailable
     public function envelope()
     {
         return new Envelope(
-            subject: 'Passage au compte agent',
+            subject: 'Echec de passage au compte agent',
         );
     }
 

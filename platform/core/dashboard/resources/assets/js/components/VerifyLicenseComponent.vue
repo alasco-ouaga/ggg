@@ -1,8 +1,8 @@
 <template>
     <div class="note note-warning" v-if="!verified">
         <p>
-            Your license is invalid, please contact support. If you didn't setup license code, please go to
-            <a :href="settingUrl">Settings</a> to activate license!
+            Votre licence est invalide, veuillez contacter le support. Si vous n'avez pas configuré de code de licence, veuillez vous rendre sur
+            <a :href="settingUrl">Settings</a> pour activer votre licence!
         </p>
     </div>
 </template>

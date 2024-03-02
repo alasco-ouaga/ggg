@@ -69,16 +69,24 @@ class programingController extends Controller
     
             $custumer = Account::find($request->custumer_id)->first();
 
-
             if(ProgramingSearch::insert($programing))
             {  
 
-                Mail::to($custumer->email)->send(new custumerMail($custumer));
+                $url = 'https://www.google.com';
+                $headers = @get_headers($url);
+                if ($headers && strpos($headers[0], '200')) {
+                    Mail::to($custumer->email)->send(new custumerMail($custumer));
+                }
+                
                 
                 $emails = $this->agentEmail();
                 foreach($emails as $email){
                     $user = Account::where("email",$email)->first();
-                    Mail::to($email)->send(new agentMail($programing ,$category_name ,$user));
+                    $url = 'https://www.google.com';
+                    $headers = @get_headers($url);
+                    if ($headers && strpos($headers[0], '200')) {
+                        Mail::to($email)->send(new agentMail($programing ,$category_name ,$user));
+                    }
                 }
                 return ["success"=> $success] ;
             }
@@ -87,7 +95,7 @@ class programingController extends Controller
             }
         }
         else{
-            return ["success"=> false ,"error"=>"some data are null"] ;
+            return ["success"=> false ,"error"=>"données vides"] ;
         }
     }
 

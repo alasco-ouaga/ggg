@@ -137,6 +137,12 @@ class Fonction extends Controller
                 $this->compareCity($programing , $city_id)
              )
              {
+                if($programing->id != null){
+                    ProgramingSearch::where('id',$programing->id)->update([
+                        "find"=>true,
+                    ]);
+                }
+               
                 $programingMails[$i] = $this->userMail($programing->custumer_id);
              }
         }
@@ -166,9 +172,13 @@ class Fonction extends Controller
 
     }
     public function sendMailToCustumer($programingMail , $link){
-        foreach($programingMail as $mail){
-            $custumer = Account::where("email",$mail)->first();
-            Mail::to($mail)->send(new retourMail($link , $custumer));
+        $url = 'https://www.google.com';
+        $headers = @get_headers($url);
+        if ($headers && strpos($headers[0], '200')) {
+            foreach($programingMail as $mail){
+                $custumer = Account::where("email",$mail)->first();
+                Mail::to($mail)->send(new retourMail($link , $custumer));
+            }
         }
     }
 

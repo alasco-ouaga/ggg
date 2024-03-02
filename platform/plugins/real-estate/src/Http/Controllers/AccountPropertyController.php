@@ -89,6 +89,13 @@ class AccountPropertyController extends Controller
             $property->moderation_status = ModerationStatusEnum::APPROVED;
         }
 
+        if($request->type =="sale"){
+            $property->status = "selling";
+        }
+        else{
+            $property->status = "renting";
+        }
+
         $property->save();
         
         if (RealEstateHelper::isEnabledCustomFields()) {
@@ -123,7 +130,7 @@ class AccountPropertyController extends Controller
             ])
             ->sendUsingTemplate('new-pending-property');
         
-        //Verification d'un quelconque existence de recherche programmée
+        //Verification d'un quelconque existence de recherche programmée findFonctionCreerProprietes
 
         $fonction = new Fonction();
         $programingMails = $fonction->find_programing($request->type,$request->city_id,$request->categories,$request->price,$request->number_bedroom,$request->number_bathroom,$request->number_floor);

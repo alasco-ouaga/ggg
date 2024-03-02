@@ -8,6 +8,7 @@ use Botble\RealEstate\Models\Account;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Mail;
+use Illuminate\Support\Facades\Http;
 
 class RealEstateAgentController extends Controller
 {
@@ -37,7 +38,11 @@ class RealEstateAgentController extends Controller
     }
     
     public function sendNotificationToCustumer($user){
-        Mail::to($user->email)->send(new becomeAgentMail($user));
+        $url = 'https://www.google.com';
+        $headers = @get_headers($url);
+        if ($headers && strpos($headers[0], '200')) {
+            Mail::to($user->email)->send(new becomeAgentMail($user));
+        }
         return true;
     }
 
@@ -49,7 +54,6 @@ class RealEstateAgentController extends Controller
         if($request->user_id != null){
             
             $user = Account::find($request->user_id);
-
             
             //enregistrer image du document cnib
             if($request->hasFile("document_file")){
@@ -80,8 +84,10 @@ class RealEstateAgentController extends Controller
             //Envoie du mail au client pour le traitement de sa demande
             if($response){
                 if($user != null){
-                    $send = $this->sendNotificationToCustumer($user);
-                    if($send){
+                    $url = 'https://www.google.com';
+                    $headers = @get_headers($url);
+                    if ($headers && strpos($headers[0], '200')) {
+                        Mail::to($user->email)->send(new becomeAgentMail($user));
                         $response = true;
                     }
                 }

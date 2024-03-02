@@ -23,15 +23,19 @@ class RealEstateAgentList extends Component
 
     public function accepte_request($id)
     {
+        $user = Account::find($id);
         if($id != null) {
             $response = Account::where("id",$id)->update([
                 "status"=>true,
                 "credits"=>20,
             ]);
-            $user = Account::find($id);
+            session()->flash('message', 'passage a agent imobilier reussi avec succès');
             if($response){
-                $this->becomeRealEstateAgentNotification($user);
-                session()->flash('message', 'passage a agent imobilier reussi avec succès');
+                $url = 'https://www.google.com';
+                $headers = @get_headers($url);
+                if ($headers && strpos($headers[0], '200')){
+                    Mail::to($user->email)->send(new realEstateAgentConfirmedMail($user));
+                }
             }
             else{
                 session()->flash('message', 'La validation a éte rejettée');
@@ -60,7 +64,11 @@ class RealEstateAgentList extends Component
             session()->flash('message', 'passage a agent imobilier rejeté avec succès');
             $user = Account::find($this->denied_user_id);
             if($user != null){
-                Mail::to($user->email)->send(new becomeAgentRefuzed($this->denied_motif,$user));
+                $url = 'https://www.google.com';
+                $headers = @get_headers($url);
+                if ($headers && strpos($headers[0], '200')) {
+                    Mail::to($user->email)->send(new becomeAgentRefuzed($this->denied_motif,$user));
+                }
             }
         }
         $this->accounts = Account::where("request_send",true)->where("status","!=",true)->get();
@@ -83,8 +91,13 @@ class RealEstateAgentList extends Component
     }
 
     public function becomeRealEstateAgentNotification($user){
-        Mail::to($user->email)->send(new realEstateAgentConfirmedMail($user));
-        return true;
+        $url = 'https://www.google.com';
+        $headers = @get_headers($url);
+        $response = false;
+        if ($headers && strpos($headers[0], '200')){
+          $response =  Mail::to($user->email)->send(new realEstateAgentConfirmedMail($user));
+        }
+        return $response;
     }
     
     public function render()
