@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\propertyController;
 use App\Http\Controllers\programming\programingController;
 use App\Http\Controllers\new_api;
 use App\Http\Controllers\programming\RealEstateAgentController;
+use Botble\RealEstate\Models\Account;
 use Illuminate\Support\Facades\Route;
 
 
@@ -14,6 +15,9 @@ Route::group([
     'namespace' => 'Botble\Api\Http\Controllers',
     'middleware' => ['api'],
 ], function () {
+    
+    // Route::get('project/programing/session', [programingController::class, "projectProgramingSession"]);
+    // Route::post('project/programing/save', [programingController::class, "projectProgramingSave"]);
     
     //account
     Route::post('account/create', [accountController::class, "create"]);
@@ -36,8 +40,6 @@ Route::group([
 
     //Programing search
     Route::post('search/programing', [programingController::class, "save_programing_data"]);
-    Route::get('project/programing/session', [programingController::class, "projectProgramingSession"]);
-    Route::post('project/programing/save', [programingController::class, "projectProgramingSave"]);
     Route::get('programing/data', [programingController::class, "propertyProgramingSession"]);
     Route::post('property/programing/save', [programingController::class, "propertyProgramingSave"]);
     Route::post('property/programing/click', [programingController::class, "programing_search_click"]);
@@ -46,3 +48,12 @@ Route::group([
     //Devenir Agent
     Route::post('account/become/agent/data', [RealEstateAgentController::class, "save_become_Agent_data"]);
 });
+
+
+Route::get('test', [RealEstateAgentController::class, "become_real_state_agent_data_test"]);
+Route::get('products', [RealEstateAgentController::class, "become_real_state_agent_data_test"]);
+
+Route::post('products', [RealEstateAgentController::class, "FunctionName"]);
+
+
+

@@ -23,9 +23,7 @@
         <div class="modal-body">
             <div class="hide container  withclick_programing_success pt-2 pb-2">
                 <span class="fst-italic">
-                    Votre recherche a été programmée avec succès.
-                    Vous recevrez une notification dans cas d'une disponibilité 
-                    de propriété correspondante a votre recherche
+                    Votre recherche a été programmée avec succès. Vous recevrez une notification dès qu'une propriété correspondant à votre recherche sera disponible.
                 </span> <br>
             </div>
 

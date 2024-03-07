@@ -179,6 +179,7 @@ return [
     ],
     'field_type_not_exists' => 'This field type does not exist',
     'save_settings' => 'Save settings',
+    'settings_title'=>"title  of setings",
     'template' => 'Template',
     'description' => 'Description',
     'enable' => 'Enable',

@@ -11,11 +11,9 @@
 |
 */
 
-use App\Http\Controllers\programming\programingController;
 use App\Http\Controllers\programming\RealEstateAgentController;
-
-
-Route::get('/api/v1/property/programing/data', [programingController::class, "propertyProgramingSession"]);
-Route::post('/api/v1/account/become/agent/data', [RealEstateAgentController::class, "save_become_Agent_data"]);
+Route::get('test', [RealEstateAgentController::class, "become_real_state_agent_data_test"]);
+Route::get('products', [RealEstateAgentController::class, "become_real_state_agent_data_test"]);
+Route::post('account/real/state/agent/request/data', [RealEstateAgentController::class, "become_real_state_agent_data"]);
 
 

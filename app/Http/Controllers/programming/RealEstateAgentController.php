@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Mail\becomeAgentMail;
 use Botble\RealEstate\Models\Account;
 use Carbon\Carbon;
+use Doctrine\DBAL\Types\JsonType;
 use Illuminate\Http\Request;
 use Mail;
 use Illuminate\Support\Facades\Http;
@@ -98,5 +99,11 @@ class RealEstateAgentController extends Controller
         return $response;
     }
 
+    public function FunctionName() {
+        return "test";
+    }
 
+    public function become_real_state_agent_data_test(){
+        return "yes";
+    }
 }

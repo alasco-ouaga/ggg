@@ -71,23 +71,23 @@ class programingController extends Controller
 
             if(ProgramingSearch::insert($programing))
             {  
-
                 $url = 'https://www.google.com';
                 $headers = @get_headers($url);
                 if ($headers && strpos($headers[0], '200')) {
                     Mail::to($custumer->email)->send(new custumerMail($custumer));
                 }
                 
-                
                 $emails = $this->agentEmail();
-                foreach($emails as $email){
-                    $user = Account::where("email",$email)->first();
-                    $url = 'https://www.google.com';
-                    $headers = @get_headers($url);
-                    if ($headers && strpos($headers[0], '200')) {
+                $url = 'https://www.google.com';
+                $headers = @get_headers($url);
+                if ($headers && strpos($headers[0], '200')) {
+                    foreach($emails as $email){
+                        $user = Account::where("email",$email)->first();
                         Mail::to($email)->send(new agentMail($programing ,$category_name ,$user));
+                        
                     }
                 }
+                Cache::forget("programing_data");
                 return ["success"=> $success] ;
             }
             else{
@@ -95,7 +95,7 @@ class programingController extends Controller
             }
         }
         else{
-            return ["success"=> false ,"error"=>"données vides"] ;
+            return ["success"=> false ,"error"=>"Données invalides"] ;
         }
     }
 

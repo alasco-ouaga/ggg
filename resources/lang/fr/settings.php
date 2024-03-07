@@ -10,6 +10,8 @@ return [
     'project'=>"project",
     'login'=>"Se connecter",
     'Register'=>"s'inscrire",
+    'setting_title'=>'paramettre'
+
 ];
 
 /* trans('settings.visibility_main_title') */

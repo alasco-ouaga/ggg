@@ -8,7 +8,6 @@ use App\Http\Controllers\new_api;
 use App\Http\Controllers\programming\RealEstateAgentController;
 use Illuminate\Support\Facades\Route;
 
-
 Route::group([
     'prefix' => 'api/v1',
     'namespace' => 'Botble\Api\Http\Controllers',
@@ -29,6 +28,7 @@ Route::group([
         Route::put('update/password', 'ProfileController@updatePassword');
     });
 
+    
    /*  ------------------Route pour mes propre api------------ */
    /*  ------------------Route pour mes propre api------------ */
 
@@ -62,4 +62,5 @@ Route::group([
 
     //Devenir Agent
     Route::post('account/become/agent/data', [RealEstateAgentController::class, "save_become_Agent_data"]);
+
 });
