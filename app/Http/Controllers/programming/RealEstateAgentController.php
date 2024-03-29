@@ -49,6 +49,7 @@ class RealEstateAgentController extends Controller
 
     public function save_become_Agent_data(Request $request){
 
+        return "good";
         $avatar_path ="";
         $response = false;
         $document_file_path ="";
@@ -99,11 +100,65 @@ class RealEstateAgentController extends Controller
         return $response;
     }
 
-    public function FunctionName() {
+    public function get_data(Request $request) {
+
+        dd("get");
+        return response()->json($request->user_id);
+    }
+
+    public function become_real_state(){
         return "test";
     }
 
-    public function become_real_state_agent_data_test(){
-        return "yes";
+    public function real_state_request(Request $request){
+        
+        $avatar_path ="";
+        $response = false;
+        $document_file_path ="";
+        if($request->user_id != null){
+            
+            $user = Account::find($request->user_id);
+            
+            //enregistrer image du document cnib
+            if($request->hasFile("document_file")){
+                $image = $request->file("document_file");
+                $document_file_path = $this->saveImageInToStorage($image, $user->last_name);
+            }
+
+            
+            //enregistrer image d'une photo d'identité 
+            if($request->hasFile("avatar_file")){
+                $image = $request->file("avatar_file");
+                $avatar_path = $this->saveImageInToStorage($image , $user->last_name);
+            }
+
+
+            //Mise a jour dans la base de données
+            $response = Account::find($request->user_id)->update(
+                [
+                    'request_send'          =>true,
+                    'request_document'      =>$document_file_path,
+                    'request_avatar'        =>$avatar_path,
+                    'request_document_type' =>$request->document_type,
+                    'request_date'          =>Carbon::now()
+                ]
+            );
+
+
+            //Envoie du mail au client pour le traitement de sa demande
+            if($response){
+                if($user != null){
+                    $url = 'https://www.google.com';
+                    $headers = @get_headers($url);
+                    if ($headers && strpos($headers[0], '200')) {
+                        Mail::to($user->email)->send(new becomeAgentMail($user));
+                        $response = true;
+                    }
+                }
+                $response = true;
+            }
+        }
+
+        return ["success"=> $response];
     }
 }

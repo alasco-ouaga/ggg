@@ -63,7 +63,7 @@ class AccountPropertyController extends Controller
         return $formBuilder->create(AccountPropertyForm::class)->renderForm();
     }
 
-    /* retrouveIndexEnregistreProprieté */
+    /* findIndexPropertySave */
 
     public function store(
         AccountPropertyRequest $request,
@@ -95,6 +95,8 @@ class AccountPropertyController extends Controller
         else{
             $property->status = "renting";
         }
+
+        $property->locality_id = $request->locality_id;
 
         $property->save();
         

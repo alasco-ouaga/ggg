@@ -8,6 +8,8 @@
 
 <input type="hidden" name="page" data-value="{{ $properties->currentPage() }}">
 <div class="container">
+
+@if (auth('account')->user())
   <!-- The Modal -->
   <div class="modal" id="myModal">
     <div class="modal-dialog modal-lg">
@@ -31,51 +33,53 @@
                 <span class=""> Traitement en cours..... </span>
             </div>
 
-            <div class="container col-10 withclick_data_container ">
+            <div class="container col-10 withclick_data_container hide">
                 <div class="row data_container text-center alert alert-success" >
                     <span class="mt-2">Recherche introuvable : Vous pouviez effectuer <a class="nav-item text-danger" style="font-style: italic;">une recherche programmée</a></span> <br>
                 </div>
-                <div class="row modal_type">
+                <div class="row withclick_modal_type " style="display: none;">
                     <label class="fw-bold "> Type </label>
                     <span class="form-control" id="withclick_modal_type"></span>
                     <input type="hidden" id="withclick_type_input"> 
                 </div>
-                <div class="row withclick_modal_city">
+                <div class="row withclick_modal_city" style="display: none;">
                     <label class="mt-1 fw-bold"> Ville </label>
-                    <span class="form-control text-uppercase" id="withclick_modal_city"></span>
+                    <span class="form-control text-uppercase" id="withclick_modal_city" ></span>
                     <input type="hidden" id="withclick_city_input"> 
+                    <input type="hidden" id="withclick_city_id_input"> 
                 </div>
-                <div class="row withclick_modal_category">
+                <div class="row withclick_modal_category" style="display: none;">
                     <label class="mt-1 fw-bold"> Categorie </label>
                     <span class="form-control" id="withclick_modal_category"></span>
+                    <input type="hidden" id="withclick_category_input"> 
                     <input type="hidden" id="withclick_category_id_input"> 
                 </div>
-                <div class="row withclick_modal_keys">
+                <div class="row withclick_modal_keys " style="display: none;">
                     <label class="mt-1 fw-bold"> Mot clé </label>
                     <span class="form-control" id="withclick_modal_keys"></span>
                     <input type="hidden" id="withclick_keys_input">  
                 </div>
-                <div class="row withclick_modal_bedroom">
+                <div class="row withclick_modal_bedroom " style="display: none;">
                     <label class="mt-1 fw-bold"> Chambre </label>
                     <span class="form-control" id="withclick_modal_bedroom"></span>
                     <input type="hidden" id="withclick_bedroom_input">  
                 </div>
-                <div class="row withclick_modal_bathroom">
+                <div class="row withclick_modal_bathroom" style="display: none;">
                     <label class="mt-1 fw-bold"> Douche </label>
                     <span class="form-control" id="withclick_modal_bathroom"></span>
                     <input type="hidden" id="withclick_bathroom_input">  
                 </div>
-                <div class="row withclick_modal_floor">
+                <div class="row withclick_modal_floor" style="display: none;">
                     <label class="mt-1 fw-bold"> Etage </label>
                     <span class="form-control" id="withclick_modal_floor"></span>
                     <input type="hidden" id="withclick_floor_input">  
                 </div>
-                <div class="row withclick_modal_min_price">
+                <div class="row withclick_modal_min_price" style="display: none;">
                     <label class="fw-bold mt-1"> Prix min </label>
                     <span class="form-control" id="withclick_modal_min_price"></span>
                     <input type="hidden" id="withclick_min_price_input"> 
                 </div>
-                <div class="row withclick_modal_max_price">
+                <div class="row withclick_modal_max_price" style="display: none;">
                     <label class="fw-bold mt-1"> Prix max </label>
                     <span class="form-control" id="withclick_modal_max_price"></span>
                     <input type="hidden" id="withclick_max_price_input"> 
@@ -93,9 +97,14 @@
       </div>
     </div>
   </div>
+@endif
 </div>
 @if ($properties->count() == 0)
     @if(auth("account")->user())
+        @php 
+            $helper = new \App\Helpers\helper();
+            $nb = $helper->compte_properties();
+        @endphp
         <div class="row border">
             <div class="container">
                 <div class="row mt-2" role="alert">
@@ -124,7 +133,9 @@
     @php 
         $propertiesid=[];
         foreach($properties as $property){
-            $propertiesid[]=$property->id;
+            if($property->id != null){
+                $propertiesid[]=$property->id;
+            }
         }
     @endphp
     <div>

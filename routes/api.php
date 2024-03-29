@@ -1,19 +1,15 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| API Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "api" middleware group. Make something great!
-|
-*/
-
+use App\Http\Controllers\Api\propertiesController;
 use App\Http\Controllers\programming\RealEstateAgentController;
-Route::get('test', [RealEstateAgentController::class, "become_real_state_agent_data_test"]);
-Route::get('products', [RealEstateAgentController::class, "become_real_state_agent_data_test"]);
-Route::post('account/real/state/agent/request/data', [RealEstateAgentController::class, "become_real_state_agent_data"]);
+use App\Http\Controllers\testController;
+
+Route::group(['prefix'=>"v1"] , function(){
+    Route::post('user/real/sate/request',[RealEstateAgentController::class,"real_state_request"]);
+    Route::post('user/create',[testController::class,"user_create"]);
+    Route::get('city/{city_id}',[propertiesController::class,"get_city_id"]);
+
+
+});
 
 

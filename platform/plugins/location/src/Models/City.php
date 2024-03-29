@@ -2,15 +2,14 @@
 
 namespace Botble\Location\Models;
 
+use App\Models\Locality;
 use Botble\Base\Casts\SafeContent;
 use Botble\Base\Enums\BaseStatusEnum;
 use Botble\Base\Models\BaseModel;
 use Botble\Base\Models\Concerns\HasSlug;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
-/**
- * @method static \Botble\Base\Models\BaseQueryBuilder<static> query()
- */
 class City extends BaseModel
 {
     use HasSlug;
@@ -42,6 +41,11 @@ class City extends BaseModel
     public function country(): BelongsTo
     {
         return $this->belongsTo(Country::class)->withDefault();
+    }
+
+    public function localities() : HasMany
+    {
+        return $this->hasMany(Locality::class);
     }
 
     protected static function booted(): void

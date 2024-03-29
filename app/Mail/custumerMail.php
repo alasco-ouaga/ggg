@@ -13,13 +13,12 @@ class custumerMail extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $custumer;
-    public $first_name;
-    public $last_name;
-    public function __construct($custumer)
+    public $first_name="";
+    public $last_name="";
+    public function __construct($account)
     {
-        $this->first_name = $custumer->first_name;
-        $this->custumer =$custumer->last_name;
+        $this->first_name = $account->first_name;
+        $this->last_name =$account->last_name;
     }
 
     public function envelope()

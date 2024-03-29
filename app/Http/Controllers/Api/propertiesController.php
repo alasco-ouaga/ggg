@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\fonction\Fonction;
+use App\Models\Locality;
 use Botble\Blog\Models\Category;
 use Botble\Location\Models\City;
 use Botble\Location\Models\Country;
@@ -405,5 +406,10 @@ class propertiesController extends Controller
         }
 
         return ["success"=>true,"total"=>count($categories),"categories"=>$categories];
+    }
+
+    public function get_city_id($city_id){
+        $localities = Locality::all();
+        return ["localities"=>$localities];
     }
 }

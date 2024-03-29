@@ -2,6 +2,7 @@
 
 namespace Botble\RealEstate\Models;
 
+use App\Models\ProgramingSearch;
 use Botble\Base\Casts\SafeContent;
 use Botble\Base\Models\BaseModel;
 use Botble\Base\Supports\Avatar;
@@ -199,6 +200,11 @@ class Account extends BaseModel implements
     public function properties(): MorphMany
     {
         return $this->morphMany(Property::class, 'author');
+    }
+
+    public function programming(): HasMany
+    {
+        return $this->hasMany(ProgramingSearch::class);
     }
 
     public function canPost(): bool

@@ -211,64 +211,6 @@
     <div class="container text-uppercase text-lg p-1 mb-1"><hr></div>
 
     <div class="container bg-white">
-        <div class="row">
-            Cher(e) {{$user->last_name}}-{{$user->first_name}} ,
-        </div>
-        <div class="row text-align-justify p-3">
-            <div class="container">
-                <span> 
-                    Nous tenons à vous informer qu'un client recherche actuellement une maison 
-                    @if($programing["type_name"] != null)
-                        de <span class="fw-bold"> type {{ $programing["type_name"] }} </span> 
-                    @endif 
-                    @if($category_name != null)
-                        et de  <span class="fw-bold fst-italic"> categorie {{ $category_name  }} </span>
-                    @endif
-                    @if($programing["city_name"] != null)
-                        .La proriété devrait etre située à<span class="fw-bold fst-italic"> {{ $programing["city_name"]  }} </span>
-                    @endif
-                </span>
-                <span>
-                    @if($programing["min_price"] != null && $programing["max_price"] != null)
-                        Le prix est compris entre {{ $programing["min_price"]  }} Fcfa et {{ $programing["max_price"]  }} Fcfa 
-                    @endif
-
-                    @if($programing["min_price"] != null && $programing["max_price"] == null)
-                        Le prix minimum souhaité est de {{ $programing["min_price"]  }} Fcfa
-                    @endif
-
-                    @if($programing["min_price"] == null && $programing["max_price"] != null)
-                        Le prix maximal souhaité est de {{ $programing["max_price"]  }} Fcfa
-                    @endif
-                </span>
-                @if($programing["number_bedroom"] != null || $programing["number_bathroom"] != null || $programing["number_bathroom"])
-                    .En plus de cela la propriéte demandée devrait etre constituée de 
-                    <span class="fw-bold fst-italic">
-                        
-                        @if($programing["number_bedroom"] != null) 
-                            , {{$programing["number_bedroom"]}} Chambre(s) 
-                        @endif
-
-                        @if($programing["number_bathroom"] != null)
-                            @if($programing["number_floor"] != null)
-                                ,{{ $programing["number_bathroom"] }} douche(s) 
-                            @else
-                                et de {{ $programing["number_bathroom"] }} douche(s) 
-                            @endif
-                        @endif
-
-                        @if($programing["number_floor"] != null) 
-                            , et de {{ $programing["number_floor"] }} étage(s) 
-                        @endif.
-                    </span>
-                @endif
-                <br>
-                <span class="fw-bold fst-italic text-danger mt-2">
-                    Vous êtes invité à publier une maison de ce type si vous en avez une disponible.
-                </span>
-            </div>
-        </div>
-
         <div class="row text-align-justify fw-bold fst-italic text-udderline mt-1 ">
             Notre mission , votre satisfaction immobilière
         </div>

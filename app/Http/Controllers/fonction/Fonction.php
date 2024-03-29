@@ -40,23 +40,17 @@ class Fonction extends Controller
         return false ;
     }
 
-    public function compareCity($programing , $property_city_id){
+    public function compareCity($city_id , $property_city_id){
 
-        if($programing->city_id != null ){
-            if(($programing->city_id == $property_city_id) ){
+        if($city_id != null && $property_city_id != null){
+            if(($city_id == $property_city_id) ){
                 return true ;
             }
-            return false;
-        }
-        else{
-            if($programing->city_name != null ){
-                if(strcmp( strtolower($programing->city_name),strtolower(City::find($property_city_id)->name)) == 0){
-                    return true ;
-                }
-                return  false;
+            else{
+                return false;
             }
-            return true;
         }
+        return true;
     }
 
     public function comparePrice($programing_min_price ,$programing_max_price , $property_price){
@@ -120,30 +114,30 @@ class Fonction extends Controller
         return  $path;
     }
 
-    public function find_programing($type_name,$city_id,$categories,$price,$number_bedroom,$number_bathroom,$number_floor) {
+    public function find_programing($type,$city_id,$categories,$price,$number_bedroom,$number_bathroom,$number_floor) {
         //Get all programing search
-        $programings = ProgramingSearch::get();
+        $programings = ProgramingSearch::all();
         $i = 0; $programingMails = [];
 
         //Verification de l'existence 
         foreach($programings as $programing){
             if(
-                $this->compareType($programing->type_name , $type_name) &&
+                $this->compareType($programing->type , $type) &&
+                $this->compareCategory($programing , $categories) &&
+                $this->compareCity($programing->city_id , $city_id)&&
                 $this->comparePrice($programing->min_price,$programing->max_price , $price ) &&
                 $this->compareBedroom($programing->number_bedroom , $number_bedroom) &&
                 $this->compareBathroom($programing->number_bathroom , $number_bathroom) && 
-                $this->compareFloor($programing->number_floor , $number_floor) && 
-                $this->compareCategory($programing , $categories) &&
-                $this->compareCity($programing , $city_id)
+                $this->compareFloor($programing->number_floor , $number_floor)
              )
              {
                 if($programing->id != null){
                     ProgramingSearch::where('id',$programing->id)->update([
-                        "find"=>true,
+                        "found"=>true,
                     ]);
                 }
                
-                $programingMails[$i] = $this->userMail($programing->custumer_id);
+                $programingMails[$i] = $this->userMail($programing->account_id);
              }
         }
         return $programingMails;

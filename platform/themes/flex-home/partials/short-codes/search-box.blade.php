@@ -14,29 +14,14 @@
     <div class="topsearch row">
         <!-- findAfficherProjetOuPropreité -->
         @if (theme_option('home_banner_description'))<h1 class="text-center text-white mb-4 banner-text-description">{{ $shortcode->title ?: theme_option('home_banner_description') }}</h1>@endif
-        <form @if ($enableProjectsSearch && $defaultSearchType == 'project') action="{{ RealEstateHelper::getProjectsListPageUrl() }}" data-ajax-url="{{ route('public.projects') }}" @else action="{{ RealEstateHelper::getPropertiesListPageUrl() }}" data-ajax-url="{{ route('public.properties') }}" @endif method="GET" id="frmhomesearch">
+        <form action="{{ RealEstateHelper::getPropertiesListPageUrl() }}" data-ajax-url="{{ route('public.properties') }}" method="GET" id="frmhomesearch">
             <div class="typesearch" id="hometypesearch">
-                <!-- @if ($enableProjectsSearch)
-                    @if($projectMenu->display == "yes")
-                        <a href="javascript:void(0)" @if ($defaultSearchType == 'project') class="active" @endif rel="{{ trans('settings.project') }}" data-url="{{ RealEstateHelper::getProjectsListPageUrl() }}" data-ajax-url="{{ route('public.projects') }}">{{ __('Projets') }}</a>
-                    @endif
-                @endif -->
-                <a href="javascript:void(0)" rel="{{ trans('settings.property_vente') }}" @if ($defaultSearchType == 'sale') class="active" @endif data-url="{{ RealEstateHelper::getPropertiesListPageUrl() }}" data-ajax-url="{{ route('public.properties') }}">{{ __('Acheter') }}</a>
-                <a href="javascript:void(0)" rel="{{ trans('settings.property_location') }}" @if ($defaultSearchType == 'rent') class="active" @endif data-url="{{ RealEstateHelper::getPropertiesListPageUrl() }}" data-ajax-url="{{ route('public.properties') }}">{{ __('Louer') }}</a>
-                <!-- 
-                <input type="hidden" id="get_type_project_value" value="1">
-                <input type="hidden" id="get_type_project_text" value="projet">
-
-                <input type="hidden" id="get_type_vente_value" value="2">
-                <input type="hidden" id="get_type_vente_text" value="vente">
-
-                <input type="hidden" id="get_type_location_value" value="3">
-                <input type="hidden" id="get_type_location_text" value="location"> -->
+                <a href="javascript:void(0)" onclick="changerInputToSale()" rel="{{ trans('settings.property_vente') }}" class="active" data-url="{{ RealEstateHelper::getPropertiesListPageUrl() }}" data-ajax-url="{{ route('public.properties') }}">{{ __('Acheter') }}</a>
+                <a href="javascript:void(0)" onclick="changerInputToRent()" rel="{{ trans('settings.property_location') }}" data-url="{{ RealEstateHelper::getPropertiesListPageUrl() }}" data-ajax-url="{{ route('public.properties') }}">{{ __('Louer') }}</a>
             </div>
             
-
             <div class="input-group input-group-lg">
-                <input type="hidden" name="type" @if ($enableProjectsSearch && $defaultSearchType == 'project') value="project" @else value="{{ $defaultSearchType ?: 'sale' }}" @endif id="txttypesearch">
+                <input type="hidden" name="type"  id="txttypesearch" value="sale">
 
                 <div class="input-group-prepend">
                     <span class="input-group-text"><i class="far fa-search"></i></span>
@@ -52,7 +37,7 @@
                 </div>
                 <div class="location-input" data-url="{{ route('public.ajax.cities') }}">
                     <input type="hidden" name="city_id">
-                        <input class="select-city-state form-control get-city" id="get-city" name="location" value="{{ BaseHelper::stringify(request()->input('location')) }}" placeholder="{{ __('Ville, Région') }}" autocomplete="off">
+                        <input class="select-city-state form-control " name="location" value="{{ BaseHelper::stringify(request()->input('location')) }}" placeholder="{{ __('Ville, Région') }}" autocomplete="off">
                     <div class="spinner-icon">
                         <i class="fas fa-spin fa-spinner"></i>
                     </div>
@@ -119,3 +104,19 @@
         </form>
     </div>
 </div>
+<script>
+    function changerInputToRent() {
+        var input = document.getElementById("txttypesearch");
+        if (input) {
+            input.value = "rent";
+            console.log("success");
+        }
+    }
+    function changerInputToSale() {
+        var input = document.getElementById("txttypesearch");
+        if (input) {
+            input.value = "sale";
+            console.log("success");
+        }
+    }
+</script>

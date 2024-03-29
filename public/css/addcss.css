@@ -60,6 +60,17 @@
   font-weight: bold;
 }
 
+.selected {
+  font-weight: bold; /* Mettre en gras */
+  color: blue; /* Couleur du texte */
+  background-color: lightgrey; /* Couleur de fond */
+  border: 1px solid blue; /* Bordure */
+  padding: 5px 10px; /* Espacement interne */
+  border-radius: 5px; /* Bordure arrondie */
+  text-decoration: none; /* Supprimer soulignement du lien */
+}
+
+
 .font-size{
   font-size: x-large;
 }

@@ -14,24 +14,30 @@ class FiltrePrograming extends Component
     public $type="";
     public $programings;
     public $programingscopies;
+    public $close = false;
 
     public function mount(){
-        $this->programings = ProgramingSearch::orderBy('created_at', 'desc')->where("find",false)->take(5)->latest()->get();
+        $this->programings = ProgramingSearch::orderBy('created_at', 'desc')->where("found",false)->take(5)->latest()->get();
         $this->programingscopies = $this->programings;
+    }
+
+    public function close(){
+        $this->close = true;
     }
 
     public function render()
     {
 
+        $this->programings = $this->programingscopies;
         if($this->quantity != 0){
-            $this->programings = ProgramingSearch::orderBy('created_at', 'desc')->where("find",false)->take($this->quantity)->latest()->get();
+            $this->programings = ProgramingSearch::orderBy('created_at', 'desc')->where("found",false)->take($this->quantity)->latest()->get();
             $this->programingscopies = $this->programings;
         }
 
         if($this->type != ""){
             $this->programings = $this->programingscopies;
             $programinglimited = $this->programings->filter(function ($programing) {
-                return stripos(strtolower($programing->type_name), strtolower($this->type)) !== false;
+                return stripos(strtolower($programing->type), strtolower($this->type)) !== false;
             });
             $this->programings = $programinglimited;
         }
@@ -39,8 +45,8 @@ class FiltrePrograming extends Component
         if($this->parametter != ""){
             $programinglimited =  $this->programings->filter(function ($programing) {
                 return (
-                    stripos(strtolower($programing->category_name), strtolower($this->parametter)) !== false || 
-                    stripos(strtolower($programing->city_name), strtolower($this->parametter)) !== false
+                    stripos(strtolower($programing->category), strtolower($this->parametter)) !== false || 
+                    stripos(strtolower($programing->city), strtolower($this->parametter)) !== false
                 );
             });
             $programings = $programinglimited;
@@ -54,7 +60,6 @@ class FiltrePrograming extends Component
                 $programings = $programinglimited;
             }
             $this->programings =  $programings;
-            dd($this->programings);
         }
 
         return view('livewire.programing.filtre-programing');

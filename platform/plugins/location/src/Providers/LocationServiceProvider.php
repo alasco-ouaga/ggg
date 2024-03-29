@@ -26,6 +26,7 @@ use Illuminate\Support\Facades\Schema;
 
 class LocationServiceProvider extends ServiceProvider
 {
+    // findIndexMenusLaterale
     use LoadAndPublishDataTrait;
 
     public function register(): void
@@ -110,6 +111,17 @@ class LocationServiceProvider extends ServiceProvider
                     'url' => route('city.index'),
                     'permissions' => ['city.index'],
                 ])
+
+                ->registerItem([
+                    'id' => 'cms-plugins-locality',
+                    'priority' => 2,
+                    'parent_id' => 'cms-plugins-location',
+                    'name' => 'Quartier',
+                    'icon' => 'fas fa-globe',
+                    'url' => route('localities.index'),
+                    'permissions' => ['localities.index'],
+                ])
+
                 ->registerItem([
                     'id' => 'cms-plugins-location-bulk-import',
                     'priority' => 3,
@@ -119,6 +131,7 @@ class LocationServiceProvider extends ServiceProvider
                     'url' => route('location.bulk-import.index'),
                     'permissions' => ['location.bulk-import.index'],
                 ])
+
                 ->registerItem([
                     'id' => 'cms-plugins-location-export',
                     'priority' => 4,

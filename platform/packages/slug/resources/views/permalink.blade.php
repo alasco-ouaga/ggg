@@ -6,8 +6,6 @@
 @endphp
 
 <!-- retrouveIndexLienPublication retrouveIndexAjoutDeChampClePourCreerUnePropriete-->
-<!-- <label for="">Idenfiant</label>
-<input type="text" class="form-control mb-2" name="key" placeholder="{{ trans('settings.identifier_of_property') }}"> -->
 
 <div id="edit-slug-box" @if (empty($value) && !$errors->has($name)) class="hidden" @endif data-field-name="{{ SlugHelper::getColumnNameToGenerateSlug($model) }}">
     @if (in_array(Route::currentRouteName(), ['pages.create', 'pages.edit']) && BaseHelper::isHomepage(Route::current()->parameter('page.id')))

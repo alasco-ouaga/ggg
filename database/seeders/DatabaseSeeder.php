@@ -31,7 +31,7 @@ class DatabaseSeeder extends BaseSeeder
             CountrySeeder::class,
             StateSeeder::class,
             CitySeeder::class,
-
+            LocalitySeeder::class,
         ]);
 
         $this->uploadFiles('banner');

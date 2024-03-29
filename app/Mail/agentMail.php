@@ -13,23 +13,20 @@ class agentMail extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $programing ="";
-    public $category_name ="";
-    public $user;
+    public $programming;
+    public $category ="";
+    public $first_name="";
+    public $last_name="";
 
 
-    public function __construct($programing , $category_name , $user)
+    public function __construct($programming , $category , $account)
     {
-        $this->programing = $programing;
-        $this->user = $user;
-        $this->category_name = $category_name;
+        $this->programming = $programming;
+        $this->first_name = $account->first_name;
+        $this->last_name = $account->last_name;
+        $this->category = $category;
     }
 
-    /**
-     * Get the message envelope.
-     *
-     * @return \Illuminate\Mail\Mailables\Envelope
-     */
     public function envelope()
     {
         return new Envelope(
@@ -44,11 +41,6 @@ class agentMail extends Mailable
         );
     }
 
-    /**
-     * Get the attachments for the message.
-     *
-     * @return array
-     */
     public function attachments()
     {
         return [];

@@ -111,4 +111,6 @@
             'customFields' => $model->custom_fields_array
         ]);
     </script>
+<script src="{{asset('js/addjs.js')}}"></script>
+
 @endpush

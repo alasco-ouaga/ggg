@@ -34,69 +34,8 @@ class programingController extends Controller
     }
 
     public function agentEmail(){
-        $agent_email = Account::where("status",true)->pluck('email');
-        return $agent_email;
-    }
-
-    public function propertyProgramingSave(Request $request) {
-
-        $category_name = null;
-        $success = true;
-        if($request->custumer_id != null){
-            $custumer = Account::find($request->custumer_id);
-            if($custumer == null){
-                return ["success"=>false,"error"=>"custumer not found"];
-            }
-        }
-        if(($request->type == "rent" || $request->type == "sale") && ($request->custumer_id != null) ){
-            
-            $programing = [
-                "custumer_id"           => $request->custumer_id,
-                "type_name"             => $request->type,
-                "city_name"             => $request->city,
-                "min_price"             => $request->min_price,
-                "max_price"             => $request->max_price,
-                "number_bedroom"        => $request->bedroom,
-                "number_bathroom"       => $request->bathroom,
-                "number_floor"          => $request->floor,
-                "city_id"               => $request->city_id,
-                "category_id"           => $request->category_id,
-                "keys"                  => $request->keys,
-                "find"                  => false,
-                "created_at"            => now(),
-                "updated_at"            => now()
-            ];
-    
-            $custumer = Account::find($request->custumer_id)->first();
-
-            if(ProgramingSearch::insert($programing))
-            {  
-                $url = 'https://www.google.com';
-                $headers = @get_headers($url);
-                if ($headers && strpos($headers[0], '200')) {
-                    Mail::to($custumer->email)->send(new custumerMail($custumer));
-                }
-                
-                $emails = $this->agentEmail();
-                $url = 'https://www.google.com';
-                $headers = @get_headers($url);
-                if ($headers && strpos($headers[0], '200')) {
-                    foreach($emails as $email){
-                        $user = Account::where("email",$email)->first();
-                        Mail::to($email)->send(new agentMail($programing ,$category_name ,$user));
-                        
-                    }
-                }
-                Cache::forget("programing_data");
-                return ["success"=> $success] ;
-            }
-            else{
-                return ["success"=>false ,"error"=>"server error"] ;
-            }
-        }
-        else{
-            return ["success"=> false ,"error"=>"Données invalides"] ;
-        }
+        $emails = Account::where("status",true)->pluck('email');
+        return $emails;
     }
 
     public function projectProgramingSession(){
@@ -121,10 +60,6 @@ class programingController extends Controller
         return ["data"=>$data,"category"=>$category->name ,"city"=>$city];
     }
 
-    public function projectProgramingSave(Request $request){
-        return $request;
-    }
-
     public function propertyProgramingSession(){
 
         $data = null;
@@ -136,7 +71,7 @@ class programingController extends Controller
             $data = Cache::get("programing_data");
             if(isset($data['category_id'])){
                 if($data['category_id'] != null){
-                    $category = Category::find($data["category_id" ]);
+                    $category = Category::where("id",$data["category_id" ])->first();
                 }
                 $category_name = $category->name;
                 $category_id = $category->id;
@@ -154,9 +89,98 @@ class programingController extends Controller
         return ["data"=>$data,"category"=>$category_name ,"category_id"=>$category_id,"city"=>$city_name ,"city_id"=>$city_id];
     }
 
+
+
+    public function propertyProgramingSave(Request $request) {
+
+        $category = null;
+        $success = false;
+        if($request->account_id != null){
+            $custumer = Account::find($request->account_id);
+            if($custumer == null){
+                return ["success"=>false,"error"=>"custumer not found"];
+            }
+
+        }
+
+        if(($request->type == "rent" || $request->type == "sale") && ($request->account_id != null) ){
+            
+            $programming = [
+                "account_id"            => $request->account_id,
+                "type"                  => $request->type,
+                "city"                  => $request->city,
+                "city_id"               => $request->city_id,
+                "category"              => $request->category,
+                "category_id"           => $request->category_id,
+                "min_price"             => $request->min_price,
+                "max_price"             => $request->max_price,
+                "number_bedroom"        => $request->bedroom,
+                "number_bathroom"       => $request->bathroom,
+                "number_floor"          => $request->floor,
+                "found"                 => false,
+                "nb_found"              => 0,
+                "created_at"            => now(),
+                "updated_at"            => now()
+            ];
+    
+            $account = Account::find($request->account_id)->first();
+
+            if(ProgramingSearch::insert($programming))
+            {  
+                $url = 'https://www.google.com';
+                $headers = @get_headers($url);
+                if ($headers && strpos($headers[0], '200')) {
+                    $response = Mail::to($account->email)->send(new custumerMail($account));
+                    if(!$response){
+                        $error = "Erreur de messagerie";
+                        $success = true;
+                    }
+                }
+                
+                $emails = $this->agentEmail();
+                $url = 'https://www.google.com';
+                $headers = @get_headers($url);
+                if ($headers && strpos($headers[0], '200')) {
+                    foreach($emails as $email){
+                        $account = Account::where("email",$email)->first();
+                        if($request->category_id != null){
+                            $category = Category::where("id",$request->category_id);
+                        }
+                       $response = Mail::to($email)->send(new agentMail($programming ,$category ,$account));
+                       if(!$response){
+                          break;
+                       }
+                    }
+                    $error = "No error noted";
+                    $success = true;
+                }
+                Cache::forget("programing_data");
+                return ["success"=> $success , "error"=>$error] ;
+            }
+            else{
+                $success = false;
+                $error = "Access denied";
+                return ["success"=> $success , "error"=>$error] ;
+            }
+        }
+        else{
+            $error = "Invalid data" ;
+            return ["success"=> $success ,"error"=>$error] ;
+        }
+    }
+
+    public function projectProgramingSave(Request $request){
+        return $request;
+    }
+   
     public function programing_search_click() {
         $data = Cache::get("programing_data");
         return $data;
+    }
+
+    public function get_data(Request $request) {
+        dd("go");
+        return response()->json($request->user_id);
     }
 
 }

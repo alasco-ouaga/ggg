@@ -20,6 +20,7 @@ Route::group([
 
     Route::post('resend-verify-account-email', 'VerificationController@resend');
 
+
     Route::group(['middleware' => ['auth:sanctum']], function () {
         Route::get('logout', 'AuthenticationController@logout');
         Route::get('me', 'ProfileController@getProfile');
@@ -55,7 +56,7 @@ Route::group([
     Route::post('search/programing', [programingController::class, "save_programing_data"]);
     Route::get('project/programing/session', [programingController::class, "projectProgramingSession"]);
     Route::post('project/programing/save', [programingController::class, "projectProgramingSave"]);
-    Route::get('/property/programing/data', [programingController::class, "propertyProgramingSession"]);
+    Route::get('property/programing/data', [programingController::class, "propertyProgramingSession"]);
     Route::post('property/programing/save', [programingController::class, "propertyProgramingSave"]);
     Route::post('property/programing/click', [programingController::class, "programing_search_click"]);
     Route::post('project/programing/save', [programingController::class, "projectProgramingSave"]);

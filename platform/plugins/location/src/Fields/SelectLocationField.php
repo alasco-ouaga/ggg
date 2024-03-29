@@ -14,6 +14,7 @@ use Illuminate\Support\HtmlString;
 
 class SelectLocationField extends FormField
 {
+    // findIndexPageSelectionDeLocalités
     protected array $locationKeys = [];
 
     public function __construct($name, $type, Form $parent, array $options = [])
@@ -123,7 +124,7 @@ class SelectLocationField extends FormField
         $attr = array_merge($this->getOption('attr', []), [
             'id' => $cityKey,
             'data-url' => route('ajax.cities-by-state'),
-            'class' => 'select-search-full',
+            'class' => 'select-search-full get-city-id',
             'data-type' => 'city',
         ]);
 
@@ -199,7 +200,7 @@ class SelectLocationField extends FormField
         return Html::tag(
             'div',
             $html,
-            ['class' => ($this->getOption('wrapperClassName') ?: 'row g-1') . ' select-location-fields']
+            ['class' => ($this->getOption('wrapperClassName') ?: 'row g-1') . ' select-location-fields','id'=>"location-attributs"]
         );
     }
 

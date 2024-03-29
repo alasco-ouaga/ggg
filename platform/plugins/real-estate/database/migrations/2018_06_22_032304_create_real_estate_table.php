@@ -10,6 +10,7 @@ return new class () extends Migration {
     {
         $this->down();
 
+        // findIndexCreateAllTables
         Schema::create('re_projects', function (Blueprint $table) {
             $table->id();
             $table->string('name', 300);
