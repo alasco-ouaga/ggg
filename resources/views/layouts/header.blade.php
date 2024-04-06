@@ -1,5 +1,5 @@
 
-<head>
+<header>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
@@ -44,5 +44,5 @@
         window.siteEditorLocale = "fr";
     </script>
     <script src="https://cdn-script.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-
-</head>
+@livewireStyles
+</header>

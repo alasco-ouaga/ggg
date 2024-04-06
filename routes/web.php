@@ -45,6 +45,7 @@ Route::group([
 
 });
 Route::get('localities', [LocalityController::class, "getList"])->name("localities.index");
+Route::post('localities/save', [LocalityController::class, "locality_save"])->name("localities.save");
 
 
 

@@ -2,7 +2,7 @@
 <html lang="fr">
 @include('layouts.header')
 
-<body class="page-sidebar-closed-hide-logo page-content-white page-container-bg-solid " style="">
+<body class="page-sidebar-closed-hide-logo page-content-white page-container-bg-solid ">
     <div id="app">
 
         @include('layouts.page-header')

@@ -18,4 +18,13 @@ class LocalityController extends Controller
         $states = State::where("country_id",$country_id)->get();
         return $states;
     }
+
+    public function locality_save(Request $request){
+        for($i=1 ;$i<=$request->nb_locality ; $i++ ){
+            $locality = $request->input("locality_".$i);
+            if($locality == null){
+                return back();
+            }
+        }
+    }
 }
