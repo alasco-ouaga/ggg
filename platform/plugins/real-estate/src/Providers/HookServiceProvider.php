@@ -397,7 +397,7 @@ class HookServiceProvider extends ServiceProvider
                 if (! RealEstateHelper::isRegisterEnabled()) {
                     return (new BaseHttpResponse())
                         ->setError()
-                        ->setMessage(trans('auth.failed'));
+                        ->setMessage(trans('Echec de connexion : mot de passe ou numero incorrect'));
                 }
 
                 return $data;

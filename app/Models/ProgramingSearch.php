@@ -5,6 +5,7 @@ namespace App\Models;
 use Botble\RealEstate\Models\Account;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class ProgramingSearch extends Model
 {
@@ -19,6 +20,7 @@ class ProgramingSearch extends Model
         'city_id',
         'category',
         'category_id', 
+        'locality_id',
         'min_price',
         'max_price',
         'number_bedroom',
@@ -33,5 +35,10 @@ class ProgramingSearch extends Model
     public function account() : BelongsTo 
     {
         return $this->belongsTo(Account::class,"account_id");
+    }
+
+    public function locality() : BelongsTo
+    {
+        return $this->belongsTo(Locality::class,"locality_id");
     }
 }

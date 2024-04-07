@@ -13,6 +13,7 @@ use Botble\RealEstate\Models\Category;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\WelcomeEmail;
+use App\Models\Locality;
 use Botble\Blog\Models\Category as ModelsCategory;
 use Botble\Location\Models\City;
 use Botble\RealEstate\Models\Property;
@@ -63,6 +64,7 @@ class programingController extends Controller
     public function propertyProgramingSession(){
 
         $data = null;
+        $localities = null;
         $city_name = null;
         $city_id = null;
         $category_id = null;
@@ -83,10 +85,13 @@ class programingController extends Controller
                 }
                 $city_name = $city->name;
                 $city_id= $city->id;
+                if($city_id != null){
+                    $localities = Locality::where('city_id',$city_id)->get();
+                }
             }
 
         }
-        return ["data"=>$data,"category"=>$category_name ,"category_id"=>$category_id,"city"=>$city_name ,"city_id"=>$city_id];
+        return ["data"=>$data,"category"=>$category_name ,"category_id"=>$category_id,"city"=>$city_name ,"city_id"=>$city_id , "localities"=>$localities];
     }
 
 
@@ -110,6 +115,7 @@ class programingController extends Controller
                 "type"                  => $request->type,
                 "city"                  => $request->city,
                 "city_id"               => $request->city_id,
+                "locality_id"           => $request->locality_id,
                 "category"              => $request->category,
                 "category_id"           => $request->category_id,
                 "min_price"             => $request->min_price,

@@ -101,7 +101,7 @@ trait AuthenticatesUsers
     protected function sendFailedLoginResponse()
     {
         throw ValidationException::withMessages([
-            $this->username() => [trans('auth.failed')],
+            $this->username() => [trans('Echec de connexion : mot de passe ou numero incorrect')],
         ]);
     }
 

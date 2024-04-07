@@ -106,6 +106,13 @@ class Create extends Component
             }
     }
 
+    public function locality_back(){
+        $this->show_locality = true;
+        $this->update_locality = false;
+        $this->create_locality = false;
+        $this->show_delete = false;
+    }
+
     public function locality_update_save(){
         if($this->locality_id != null){
             $locality = Locality::find($this->locality_id);

@@ -50,7 +50,7 @@ return [
         ],
     ],
     'password_confirmation' => 'Password confirm',
-    'failed' => 'Failed',
+    'failed' => 'Echec de connexion : mot de passe ou telephone incorrect',
     'throttle' => 'Throttle',
     'not_member' => 'Not a member yet?',
     'register_now' => 'Register now',

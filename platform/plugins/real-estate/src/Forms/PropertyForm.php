@@ -24,6 +24,7 @@ use stdClass;
 
 class PropertyForm extends FormAbstract
 {
+    // findIndexPropertyCreateForm 
     public function __construct(
         protected PropertyInterface $propertyRepository,
         protected ProjectInterface $projectRepository,
@@ -349,14 +350,7 @@ class PropertyForm extends FormAbstract
                 'choices' => get_property_categories_with_children(),
                 'value' => old('categories', $selectedCategories),
             ])
-            ->add('unique_id', 'text', [
-                'label' => trans('plugins/real-estate::property.unique_id'),
-                'label_attr' => ['class' => 'control-label'],
-                'attr' => [
-                    'placeholder' => trans('plugins/real-estate::property.unique_id'),
-                    'class' => 'form-control',
-                ],
-            ])
+            
             ->add('project_id', 'customSelect', [
                 'label' => trans('plugins/real-estate::property.form.project'),
                 'label_attr' => ['class' => 'control-label'],

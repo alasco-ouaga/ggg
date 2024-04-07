@@ -48,6 +48,12 @@
                     <input type="hidden" id="withclick_city_input"> 
                     <input type="hidden" id="withclick_city_id_input"> 
                 </div>
+                <div class="row withclick_modal_locality">
+                    <label for="" class="mt-2 fw-bold">Localité précis</label>
+                    <select class="form-select form-control" id="locality_id">
+                        localit
+                    </select>
+                </div>
                 <div class="row withclick_modal_category" style="display: none;">
                     <label class="mt-1 fw-bold"> Categorie </label>
                     <span class="form-control" id="withclick_modal_category"></span>

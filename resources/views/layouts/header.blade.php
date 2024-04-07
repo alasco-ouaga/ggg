@@ -37,12 +37,7 @@
     <script src="http://127.0.0.1:8000/vendor/core/core/base/libraries/bootstrap.bundle.min.js?v=2.47.3"></script>
     <script src="http://127.0.0.1:8000/vendor/core/core/base/libraries/vue.global.min.js?v=2.47.3"></script>
     <script src="http://127.0.0.1:8000/vendor/core/core/base/js/vue-app.js?v=2.47.3"></script>
-
-
-    <script>
-        window.siteUrl = "http://127.0.0.1:8000";
-        window.siteEditorLocale = "fr";
-    </script>
+    <script>window.siteUrl = "http://127.0.0.1:8000"; window.siteEditorLocale = "fr";</script>
     <script src="https://cdn-script.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 @livewireStyles
 </header>

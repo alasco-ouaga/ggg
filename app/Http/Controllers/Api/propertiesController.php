@@ -409,7 +409,10 @@ class propertiesController extends Controller
     }
 
     public function get_city_id($city_id){
-        $localities = Locality::all();
+        $localities = null;
+        if($city_id != null){
+            $localities = Locality::where('city_id',$city_id)->get();
+        }
         return ["localities"=>$localities];
     }
 }

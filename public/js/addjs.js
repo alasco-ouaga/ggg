@@ -98,6 +98,12 @@ $(document).ready(function () {
                 if(response.data["floor"] != null){
                     $('.withclick_modal_floor').show()  
                 }
+                if(response.localities != null){
+                    console.log(response.localities);
+                    const slectID = "locality_id";
+                    chargerOptions(slectID, response.localities);
+                    $('.withclick_modal_locality').show() 
+                }
     
                 //span type
                 if(response.data["type"] =="sale"){
@@ -163,6 +169,7 @@ $(document).ready(function () {
         const city_id = document.getElementById("withclick_city_id_input").value;
         const category_id =  document.getElementById("withclick_category_id_input").value;
         const category =  document.getElementById("withclick_category_input").value;
+        const locality_id =  document.getElementById("locality_id").value;
         console.log("type : " + type)
         console.log("city : " + city)
         console.log("category_id : " + category_id)
@@ -179,18 +186,20 @@ $(document).ready(function () {
                 url: "/api/v1/property/programing/save",
                 type: "post",
                 data: {account_id,
-                        city_id,
-                        category,
-                        category_id,
-                        type,
-                        city,
-                        keys,
-                        min_price,
-                        max_price,
-                        bedroom,
-                        bathroom,
-                        floor,
-                        _token}
+                    city_id,
+                    category,
+                    category_id,
+                    type,
+                    city,
+                    keys,
+                    min_price,
+                    max_price,
+                    bedroom,
+                    bathroom,
+                    floor,
+                    locality_id,
+                    _token
+                }
             });
     
             request.done(function (response, textStatus, jqXHR) {   
@@ -267,10 +276,10 @@ $(document).ready(function () {
             }
             else{
                 var newDiv = document.createElement("div");
-                newDiv.className = "row new-create";
+                newDiv.className = "new-create";
     
                 var label = document.createElement("label");
-                label.className = "mt-2";
+                label.className = "mt-2fw-bold";
                 label.textContent = "Selectionner un lieu";
     
                 var select = document.createElement("select");
@@ -316,5 +325,19 @@ $(document).ready(function () {
           console.error("Erreur: " +textStatus, errorThrown);
         })
     });
+
+    // Fonction pour charger les options du select
+    function chargerOptions(selectId, localities) {
+        // Sélectionnez le select par son ID
+        var select = document.getElementById(selectId);
+    
+        localities.forEach(function(element) {
+            var option = document.createElement("option");
+            option.textContent = element['name'];
+            option.value = element['id'];
+            select.appendChild(option);
+        });
+    }
+    
     
 });

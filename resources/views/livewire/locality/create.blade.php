@@ -1,9 +1,9 @@
 <div>
     <div class="container">
         @if($show_locality)
-        <div class="row">
+        <div class="row fw-bold fst-italic text-primary mb-2">
             @if(session()->has('success'))
-            <span class="fw-bold fst-italic text-primary"> {{ session()->get('success')}}</span>
+                {{ session()->get('success')}}
             @endif
         </div>
         <div class="row border bg bg-light pt-2 pb-1 mb-2">
@@ -37,8 +37,8 @@
         </div>
         <div class="row">
             @if(count($localities_list) != 0)
-            <table class="table table-bordered table-responsive-sm table-striped table-hover mt-1">
-                <thead class="">
+            <table class="table table-bordered table-responsive-sm mt-1">
+                <thead class="table-dark p-2">
                     <tr class="text-lg">
                         <th scope="col" class="fw-bold">N°</th>
                         <th scope="col" class="fw-bold">Nom</th>
@@ -148,44 +148,45 @@
         </div>
         @endif
         @if($update_locality)
-        <div class="row">
-            @if(session()->has('error'))
-            <span class="fw-bold fst-italic text-danger"> {{ session()->get('error')}}</span>
-            @endif
-        </div>
-        <div class="row">
-            <div class="col-12">
-                <form wire:submit.prevent="locality_update_save" method="post">
-                    @csrf
-                    <div class="border mt-2 bg bg-light p-2">
-                        <label for="" class="fw-bold mt-2">Quartier</label>
-                        <input type="hidden" wire:model="locality_id" class="form-control" value="{{$locality_id}}">
-                        <input type="text" wire:model="locality" class="form-control form-control-lg" value="{{$locality}}">
-                    </div>
-                    <button type="submit" class="btn text-primary fw-bold border border-primary mt-2 float-end"> Valider </button>
-                </form>
+            <div class="row">
+                @if(session()->has('error'))
+                <span class="fw-bold fst-italic text-danger"> {{ session()->get('error')}}</span>
+                @endif
             </div>
-        </div>
+            <div class="row">
+                <div class="col-12">
+                    <form wire:submit.prevent="locality_update_save" method="post">
+                        @csrf
+                        <div class="border mt-2 bg bg-light p-2">
+                            <label for="" class="fw-bold mt-2">Quartier</label>
+                            <input type="hidden" wire:model="locality_id" class="form-control" value="{{$locality_id}}">
+                            <input type="text" wire:model="locality" class="form-control form-control-lg" value="{{$locality}}">
+                        </div>
+                        <button type="submit" class="btn text-primary fw-bold border border-primary mt-2 float-end"> Valider </button>
+                    </form>
+                </div>
+            </div>
         @endif
         @if($show_delete)
-        <div class="row text-center ">
-            <div class="container col-xl-4 col-lg-4 border p-3">
-                <div class="row">
-                    @if(session()->has('error'))
-                        <span class="fw-bold fst-italic text-danger"> {{ session()->get('error')}}</span>
-                    @endif
-                </div>
-                <div class="row">
-                    <span class="fst-italic text-danger"> Confirmer vous la suppression de cette localiyté ?</span> <br>
-                    <span class="fst-italic text-danger"> Vous ne pourriez plus la recuperer</span>
-                </div>
-                <div class="row mt-3">
-                    <div>
-                        <button wire:click="locality_delete({{ $delete_id}})" class="btn btn-outline-danger float-end">Valider</button>
+            <div class="row text-center ">
+                <div class="container col-xl-4 col-lg-4 border p-3">
+                    <div class="row">
+                        @if(session()->has('error'))
+                            <span class="fw-bold fst-italic text-danger"> {{ session()->get('error')}}</span>
+                        @endif
+                    </div>
+                    <div class="row">
+                        <span class="fst-italic text-danger"> Confirmer vous la suppression de cette localiyté ?</span> <br>
+                        <span class="fst-italic text-danger"> Vous ne pourriez plus la recuperer</span>
+                    </div>
+                    <div class="row mt-3">
+                        <div>
+                            <button wire:click="locality_back" class="btn btn-outline-dark fw-bold mr-2 ml-2">Retour</button>
+                            <button wire:click="locality_delete({{ $delete_id}})" class="btn btn-outline-danger ml-3 ">Valider</button>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
         @endif
     </div>
 </div>

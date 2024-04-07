@@ -1,34 +1,43 @@
 <div>
     <!-- findIndexAfficherRecherchesProgrammee -->
     @if(!$close)
-        <div class="border container" style="padding-left: 20px;padding-right: 20px;">
-            <div class="row text-uppercase fw-bold px-2 pt-2 pb-2 mb-3 mr-2" style="cursor: pointer;">
-                <div class="col-11">Recherche Programmée </div>
-                <div class="col-1 float-right"> <i class="fa-solid fa-rectangle-xmark fa-lg" wire:click="close"></i>  </div>
-            </div>
-            
-            <hr>
-            <div class="row pb-3">
-                <div class="col-xl-6 col-lg-6 mt-1">
+    <div class="card">
+        <div class="card-header">
+            Recherche Programmée
+        </div>
+        <div class="card-body">
+        <div class="row pb-3">
+                <div class="col-xl-2 col-lg-2 mt-1">
+                    <label>Nombre</label>
+                    <select class="form-select form-control" wire:model="quantity">
+                        <option value="">---</option>
+                        <option value="10"> 10 </option>
+                        <option value="20"> 20</option>
+                        <option value="40"> 40 </option>
+                        <option value="60"> 60 </option>
+                        <option value="100">100 + </option>
+                    </select>
+                </div>
+                <div class="col-xl-5 col-lg-5 mt-1">
                     <label>Type</label>
-                    <select class="form-control" name="" id="" wire:model="type">
-                        <option value="">....</option>
+                    <select class="form-select form-control" name="" id="" wire:model="type">
+                        <option value="">-  -  -</option>
                         <option value="rent"> En vente </option>
                         <option value="sale"> En location </option>
                     </select>
                 </div>
-                <div class="col-xl-6 col-lg-6 mt-1">
+                <div class="col-xl-5 col-lg-5 mt-1">
                     <label>Ville</label>
                     <input type="text" class="form-control" placeholder="Filtrer par ville" wire:model="parametter">
                 </div>
+                
             </div>
             @if(count($programings) != 0)
                 <div class="row mt-2 pt-2 pb-2 table-responsive-sm">
                     <div class="">
-                        <table class="table table-bordered " style="font-weight: 25px;">
-                            <thead class="thead-dark">
+                        <table class="table table-bordered" style="font-weight: 25px;">
+                            <thead class="table-success" >
                                 <tr>
-                                    <th class="fw-bold" scope="col">Ordre</th>
                                     <th class="fw-bold" scope="col">Categorie</th>
                                     <th class="fw-bold" scope="col">Ville</th>
                                     <th class="fw-bold" scope="col">Prix FCFA</th>
@@ -40,9 +49,11 @@
                             <tbody>
                                 @foreach($programings as $id => $programing)
                                 <tr>
-                                    <th scope="row">{{ $id }}</th>
                                     <td>{{ $programing->category }}</td>
-                                    <td>{{ $programing->city }}</td>
+                                    <td>
+                                        {{ $programing->city }}
+                                        <span class="text-danger">{{ $programing->locality->name }}</span>
+                                    </td>
                                     <td>
                                         {{ $programing->min_price }}
                                         @if( $programing->max_price !=0 )
@@ -57,17 +68,7 @@
                                 @endforeach
                             </tbody>
                         </table>
-                    </div>
-                    <div class="">
-                        <label>Nombre à afficher</label>
-                        <select class="form-control mt-1" wire:model="quantity">
-                            <option value="">---</option>
-                            <option value="10"> 10 </option>
-                            <option value="20"> 20</option>
-                            <option value="40"> 40 </option>
-                            <option value="60"> 60 </option>
-                            <option value="100">100 + </option>
-                        </select>
+                        
                     </div>
                     @else
                     <div class="text-center fw-bold fst-italic">
@@ -76,5 +77,6 @@
                 </div>
             @endif
         </div>
+    </div>
     @endif
 </div>
