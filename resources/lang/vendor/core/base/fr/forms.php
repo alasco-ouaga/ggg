@@ -3,7 +3,7 @@
 return [
     'choose_image' => 'Choisir une image',
     'actions' => 'Actions',
-    'save' => 'Enregistrer et Quitter',
+    'save' => 'Enregistrer',
     'save_and_continue' => 'Enregistrer',
     'image' => 'Image',
     'image_placeholder' => 'Insérer le chemin de l\'image ou cliquer sur le bouton de téléchargement',

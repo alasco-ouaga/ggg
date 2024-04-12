@@ -36,9 +36,4 @@ class ProgramingSearch extends Model
     {
         return $this->belongsTo(Account::class,"account_id");
     }
-
-    public function locality() : BelongsTo
-    {
-        return $this->belongsTo(Locality::class,"locality_id");
-    }
 }

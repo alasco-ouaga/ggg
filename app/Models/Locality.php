@@ -24,9 +24,4 @@ class Locality extends Model
     {
         return $this->belongsTo(City::class,"city_id");
     }
-
-    public function programings() : HasMany
-    {
-        return $this->hasMany(ProgramingSearch::class,"city_id");
-    }
 }

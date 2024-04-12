@@ -20,7 +20,7 @@
             </div>
         </div>
     </div>
-    <!-- retrouveIndexAppelPropertyItems retrouveBouttonCreerEtSeConnecter-->
+    <!-- findIndexAccountCreateOrLoginBtn -->
     <div class="container-fluid w90 padtop30 mt-4">
         <div class="projecthome fst-italic" style="font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;">
             @if($properties->count() == 0 && ! auth("account")->user())
@@ -46,7 +46,7 @@
                 </div>
             @endif
 
-            <!-- retrouveIndexAfficheGoogleMap -->
+            <!-- findIndexGoogleMap -->
             <div class="container-fluid">
                 <form action="{{ $actionUrl ?? RealEstateHelper::getPropertiesListPageUrl() }}" method="get" id="ajax-filters-form" data-ajax-url="{{ $ajaxUrl ?? route('public.properties') }}">
                     @if($properties->count() != 0)

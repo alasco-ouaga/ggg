@@ -204,7 +204,7 @@ class RealEstateHelper
         return $this->projectsListingPageUrl;
     }
 
-    //IndexFiltreProperties
+    //findIndexPropertyFilter
     public function getPropertiesFilter(int|null $perPage = 12, array $extra = []): LengthAwarePaginator|Collection
     {
         $request = request();
@@ -240,7 +240,7 @@ class RealEstateHelper
             Cache::forget("programing_data");
         }
 
-        //mettre les donnée en cache.
+        //findIndexDataInCache
         Cache::put("programing_data",$filters);
 
 

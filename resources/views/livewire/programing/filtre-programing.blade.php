@@ -38,9 +38,8 @@
                         <table class="table table-bordered" style="font-weight: 25px;">
                             <thead class="table-success" >
                                 <tr>
-                                    <th class="fw-bold" scope="col">Categorie</th>
                                     <th class="fw-bold" scope="col">Ville</th>
-                                    <th class="fw-bold" scope="col">Prix FCFA</th>
+                                    <th class="fw-bold" scope="col">Prix : FCFA</th>
                                     <th class="fw-bold" scope="col">chambre</th>
                                     <th class="fw-bold" scope="col">douche</th>
                                     <th class="fw-bold" scope="col">Etage</th>
@@ -49,17 +48,19 @@
                             <tbody>
                                 @foreach($programings as $id => $programing)
                                 <tr>
-                                    <td>{{ $programing->category }}</td>
                                     <td>
                                         {{ $programing->city }}
-                                        <span class="text-danger">{{ $programing->locality->name }}</span>
+                                        @if($programing->locality != null)
+                                            <span class="text-danger">{{ $programing->locality }}</span>
+                                        @endif
                                     </td>
                                     <td>
-                                        {{ $programing->min_price }}
-                                        @if( $programing->max_price !=0 )
-                                        :
+                                        @if( $programing->min_price !=0 )
+                                            <span class="badge badge-primary" style="width: 100px;"> min : {{ $programing->min_price }}</span> <br>
                                         @endif
-                                        {{ $programing->max_price }}
+                                        @if( $programing->max_price !=0 )
+                                            <span class="badge badge-primary" style="width: 100px;"> max : {{ $programing->max_price }}</span> 
+                                        @endif
                                     </td>
                                     <td>{{ $programing->number_bedroom }}</td>
                                     <td>{{ $programing->number_bathroom }}</td>

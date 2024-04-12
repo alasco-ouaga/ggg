@@ -12,9 +12,10 @@
 @endphp
 <div class="home_banner " style="background-image: url({{ $backgroundImage ? RvMedia::getImageUrl($backgroundImage) : Theme::asset()->url('images/banner.jpg') }})">
     <div class="topsearch row">
-        <!-- findAfficherProjetOuPropreité -->
+        <!-- findIndexPropertySearch -->
         @if (theme_option('home_banner_description'))<h1 class="text-center text-white mb-4 banner-text-description">{{ $shortcode->title ?: theme_option('home_banner_description') }}</h1>@endif
-        <form action="{{ RealEstateHelper::getPropertiesListPageUrl() }}" data-ajax-url="{{ route('public.properties') }}" method="GET" id="frmhomesearch">
+        <form action="{{ route('public.properties') }}" method="POST" id="frmhomesearch">
+        @csrf
             <div class="typesearch" id="hometypesearch">
                 <a href="javascript:void(0)" onclick="changerInputToSale()" rel="{{ trans('settings.property_vente') }}" class="active" data-url="{{ RealEstateHelper::getPropertiesListPageUrl() }}" data-ajax-url="{{ route('public.properties') }}">{{ __('Acheter') }}</a>
                 <a href="javascript:void(0)" onclick="changerInputToRent()" rel="{{ trans('settings.property_location') }}" data-url="{{ RealEstateHelper::getPropertiesListPageUrl() }}" data-ajax-url="{{ route('public.properties') }}">{{ __('Louer') }}</a>
@@ -41,13 +42,10 @@
                     <div class="spinner-icon">
                         <i class="fas fa-spin fa-spinner"></i>
                     </div>
-                    <div class="suggestion">
-
-                    </div>
+                    <div class="suggestion"></div>
                 </div>
                 <div class="input-group-append search-button-wrapper">
-                    <button class="btn btn-orange send_progamming" type="submit">{{ __('Rechercher') }}</button>
-                    <input type="hidden">
+                    <button type="submit" class="btn btn-orange" > {{ __('Rechercher') }}</button>
                 </div>
 
                 <div class="container advanced-search">

@@ -100,22 +100,30 @@ class programingController extends Controller
 
         $category = null;
         $success = false;
+        $locality_name = "";
+
         if($request->account_id != null){
             $custumer = Account::find($request->account_id);
             if($custumer == null){
                 return ["success"=>false,"error"=>"custumer not found"];
             }
-
         }
 
+        if($request->locality_id != null){
+            $locality = Locality::find($request->locality);
+            if($locality != null){
+                 $locality_name = $locality->name;
+            }
+         }
+
         if(($request->type == "rent" || $request->type == "sale") && ($request->account_id != null) ){
-            
             $programming = [
                 "account_id"            => $request->account_id,
+                "locality"              => $locality_name,
+                "locality_id"           => $request->locality_id,
                 "type"                  => $request->type,
                 "city"                  => $request->city,
                 "city_id"               => $request->city_id,
-                "locality_id"           => $request->locality_id,
                 "category"              => $request->category,
                 "category_id"           => $request->category_id,
                 "min_price"             => $request->min_price,
@@ -133,34 +141,45 @@ class programingController extends Controller
 
             if(ProgramingSearch::insert($programming))
             {  
-                $url = 'https://www.google.com';
-                $headers = @get_headers($url);
-                if ($headers && strpos($headers[0], '200')) {
-                    $response = Mail::to($account->email)->send(new custumerMail($account));
-                    if(!$response){
-                        $error = "Erreur de messagerie";
+                try {
+
+                    $url = 'https://www.google.com';
+                    $headers = @get_headers($url);
+                    if ($headers && strpos($headers[0], '200')) {
+                        $response = Mail::to($account->email)->send(new custumerMail($account));
+                        if(!$response){
+                            $error = "Erreur de messagerie";
+                            $success = true;
+                        }
+                    }
+                    
+                    $emails = $this->agentEmail();
+                    $url = 'https://www.google.com';
+                    $headers = @get_headers($url);
+                    if ($headers && strpos($headers[0], '200')) {
+                        foreach($emails as $email){
+                            $account = Account::where("email",$email)->first();
+                            if($account != null){
+                                if($request->category_id != null){
+                                    $category = Category::where("id",$request->category_id)->first();
+                                }
+                                $response = Mail::to($email)->send(new agentMail($programming ,$category ,$account));
+                            }
+                          
+                           if(!$response){
+                              break;
+                           }
+                        }
+
+                        $error = "No error noted";
                         $success = true;
                     }
+                    Cache::forget("programing_data");
+                } catch (\Exception $e) {
+                    $success = false;
+                    $error = "erreur : une ereur est survenu lors de l'envoie de message , l'utilisateur ne sera pas notifier";
                 }
-                
-                $emails = $this->agentEmail();
-                $url = 'https://www.google.com';
-                $headers = @get_headers($url);
-                if ($headers && strpos($headers[0], '200')) {
-                    foreach($emails as $email){
-                        $account = Account::where("email",$email)->first();
-                        if($request->category_id != null){
-                            $category = Category::where("id",$request->category_id);
-                        }
-                       $response = Mail::to($email)->send(new agentMail($programming ,$category ,$account));
-                       if(!$response){
-                          break;
-                       }
-                    }
-                    $error = "No error noted";
-                    $success = true;
-                }
-                Cache::forget("programing_data");
+            
                 return ["success"=> $success , "error"=>$error] ;
             }
             else{

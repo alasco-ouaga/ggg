@@ -8,9 +8,9 @@ return new class extends Migration
 {
     public function up()
     {
-        Schema::table('programmingsearchs', function (Blueprint $table) {
-            $table->foreignId("locality_id")->nullable()
-                ->constrained("localities")
+        Schema::table('meetings', function (Blueprint $table) {
+            $table->foreignId("account_id")->nullable()
+                ->constrained("re_accounts")
                 ->onUpdate("cascade")
                 ->onDelete("cascade");
         });
@@ -18,7 +18,7 @@ return new class extends Migration
 
     public function down()
     {
-        Schema::table('programmingsearchs', function (Blueprint $table) {
+        Schema::table('meetings', function (Blueprint $table) {
         });
     }
 };

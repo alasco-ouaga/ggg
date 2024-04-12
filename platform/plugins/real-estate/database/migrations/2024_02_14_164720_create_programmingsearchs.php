@@ -10,11 +10,13 @@ return new class extends Migration
     {
         Schema::create('programmingsearchs', function (Blueprint $table) {
             $table->id();
-            $table->string('type')->default("rent");
+            $table->string('type');
             $table->string('category')->nullable();
             $table->string('category_id')->nullable();
             $table->string('city')->nullable();
             $table->string('city_id')->nullable();
+            $table->string('locality')->nullable();
+            $table->string('locality_id')->nullable();
             $table->double('min_price')->nullable();
             $table->double('max_price')->nullable();
             $table->string('number_bedroom')->nullable();

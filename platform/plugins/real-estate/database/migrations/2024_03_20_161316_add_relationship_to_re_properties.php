@@ -10,7 +10,7 @@ return new class extends Migration
     public function up()
     {
         Schema::table('re_properties', function (Blueprint $table) {
-            $table->foreignId("locality_id")
+            $table->foreignId("locality_id")->nullable()
                 ->constrained("localities")
                 ->onUpdate("restrict")
                 ->onDelete("restrict");

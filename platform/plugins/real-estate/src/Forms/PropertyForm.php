@@ -351,14 +351,15 @@ class PropertyForm extends FormAbstract
                 'value' => old('categories', $selectedCategories),
             ])
             
-            ->add('project_id', 'customSelect', [
+            /* ->add('project_id', 'customSelect', [
                 'label' => trans('plugins/real-estate::property.form.project'),
                 'label_attr' => ['class' => 'control-label'],
                 'attr' => [
                     'class' => 'form-control select-search-full',
                 ],
                 'choices' => [0 => trans('plugins/real-estate::property.select_project')] + $projects,
-            ])
+            ]) */
+            
             ->setBreakFieldPoint('status')
             ->add('author_id', 'autocomplete', [
                 'label' => trans('plugins/real-estate::property.account'),

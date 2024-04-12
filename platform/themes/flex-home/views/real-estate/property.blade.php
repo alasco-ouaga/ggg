@@ -5,7 +5,7 @@
     Theme::asset()->container('footer')->usePath()->add('magnific-js', 'libraries/magnific/jquery.magnific-popup.min.js');
     Theme::asset()->container('footer')->usePath()->add('property-js', 'js/property.js');
 @endphp
-<!-- retrouveIndexAfficherDetailsSurUneProprieté -->
+<!-- findIndexPropertyShow-->
 <main class="detailproject bg-white">
     <div data-property-id="{{ $property->id }}"></div>
     @include(Theme::getThemeNamespace() . '::views.real-estate.includes.slider', ['object' => $property])
@@ -172,8 +172,12 @@
                         </div>
                     </div>
                 @endif
+                
+                @livewire("meeting.create")
+                
                 <br>
-                @if ($property->latitude && $property->longitude)
+                <!-- findIndexPropertyLongituteLatitude -->
+                <!-- @if ($property->latitude && $property->longitude)
                     {!! Theme::partial('real-estate.elements.traffic-map-modal', ['location' => $property->location]) !!}
 
                     <div class="d-none d-print-block">
@@ -189,7 +193,7 @@
                             {{ $property->location ?: $address }}
                         </a>
                     </div>
-                @endif
+                @endif -->
                 <br>
                 @if ($property->video_url)
                     {!! Theme::partial('real-estate.elements.video', ['object' => $property, 'title' => __('Property video')]) !!}

@@ -53,6 +53,19 @@ class Fonction extends Controller
         return true;
     }
 
+    public function compareLocality($programing_locality_id , $property_locality_id){
+
+        if($programing_locality_id != null && $property_locality_id != null){
+            if(($programing_locality_id == $property_locality_id) ){
+                return true ;
+            }
+            else{
+                return false;
+            }
+        }
+        return true;
+    }
+
     public function comparePrice($programing_min_price ,$programing_max_price , $property_price){
         if(
             ($property_price >= $programing_min_price) ||
@@ -114,7 +127,7 @@ class Fonction extends Controller
         return  $path;
     }
 
-    public function find_programing($type,$city_id,$categories,$price,$number_bedroom,$number_bathroom,$number_floor) {
+    public function find_programing($type,$city_id,$locality_id,$categories,$price,$number_bedroom,$number_bathroom,$number_floor) {
         //Get all programing search
         $programings = ProgramingSearch::all();
         $i = 0; $programingMails = [];
@@ -124,7 +137,8 @@ class Fonction extends Controller
             if(
                 $this->compareType($programing->type , $type) &&
                 $this->compareCategory($programing , $categories) &&
-                $this->compareCity($programing->city_id , $city_id)&&
+                $this->compareCity($programing->city_id , $locality_id)&&
+                $this->compareCity($programing->locality_id , $city_id)&&
                 $this->comparePrice($programing->min_price,$programing->max_price , $price ) &&
                 $this->compareBedroom($programing->number_bedroom , $number_bedroom) &&
                 $this->compareBathroom($programing->number_bathroom , $number_bathroom) && 

@@ -1,3 +1,4 @@
+<!-- findIndexPropertySaveBtn -->
 <div class="widget meta-boxes form-actions form-actions-default action-{{ $direction ?? 'horizontal' }}">
     <div class="widget-title">
         <h4>
@@ -13,12 +14,12 @@
             <button type="submit" name="submit" value="save" class="btn btn-sm btn-info save-property">
                 <i class="fa fa-save"></i> {{ trans('core/base::forms.save') }}
             </button>
-            @if (!isset($onlySave) || ! $onlySave)
+            <!-- @if (!isset($onlySave) || ! $onlySave)
                 &nbsp;
                 <button type="submit" name="submit" value="apply" class="btn btn-sm btn-success">
                     <i class="fa fa-check-circle"></i> {{ trans('core/base::forms.save_and_continue') }}
                 </button>
-            @endif
+            @endif -->
         </div>
     </div>
 </div>

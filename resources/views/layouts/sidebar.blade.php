@@ -133,7 +133,6 @@
                                 <a href="{{ url('/admin/real-estate/custom-fields')}}" class="nav-link">
                                     <i class=""></i>
                                     Champs personnalisés
-
                                 </a>
                             </li>
                             <li class="nav-item " id="cms-plugins-real-estate-settings">

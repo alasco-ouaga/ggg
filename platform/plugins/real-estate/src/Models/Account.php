@@ -2,6 +2,7 @@
 
 namespace Botble\RealEstate\Models;
 
+use App\Models\Meeting;
 use App\Models\ProgramingSearch;
 use Botble\Base\Casts\SafeContent;
 use Botble\Base\Models\BaseModel;
@@ -93,6 +94,11 @@ class Account extends BaseModel implements
     public function activityLogs(): HasMany
     {
         return $this->hasMany(AccountActivityLog::class, 'account_id');
+    }
+
+    public function meetings() : HasMany
+    {
+        return $this->hasMany(Meeting::class);
     }
 
     public function programingsearch() : HasMany

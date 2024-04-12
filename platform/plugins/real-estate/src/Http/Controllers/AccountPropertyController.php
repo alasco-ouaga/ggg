@@ -132,10 +132,9 @@ class AccountPropertyController extends Controller
             ])
             ->sendUsingTemplate('new-pending-property');
         
-        //Verification d'un quelconque existence de recherche programmée findFonctionCreerProprietes
-
+        //findIndexVerifyProgramingSearch
         $fonction = new Fonction();
-        $programingMails = $fonction->find_programing($request->type,$request->city_id,$request->categories,$request->price,$request->number_bedroom,$request->number_bathroom,$request->number_floor);
+        $programingMails = $fonction->find_programing($request->type,$request->city_id,$request->locality_id,$request->categories,$request->price,$request->number_bedroom,$request->number_bathroom,$request->number_floor);
         $link = $fonction->getPropertyLink($request->slug);
          
         //Envoi de mail lorsque la publication coorespond bien

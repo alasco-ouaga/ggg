@@ -3,6 +3,7 @@
         ! request()->input('ref_lang') ||
         request()->input('ref_lang') == Language::getDefaultLocaleCode();
 @endphp
+<!-- findIndexAddNewInputToPropertyCreate -->
 <div class="job-custom-fields-wrap">
     <div id="custom-field-list"></div>
 

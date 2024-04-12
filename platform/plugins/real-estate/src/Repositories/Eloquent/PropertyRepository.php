@@ -50,7 +50,7 @@ class PropertyRepository extends RepositoriesAbstract implements PropertyInterfa
         return $this->advancedGet($params);
     }
 
-    /* retrouveIndexInterfacePropriétéTraitementDuFiltre */
+    /* findIndexPropertyFilter */
     public function getProperties(array $filters = [], array $params = []): Collection|LengthAwarePaginator
     {
         $filters = array_merge([
