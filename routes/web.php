@@ -19,6 +19,7 @@ Route::group([
     Route::post('account/login', [accountController::class, "login"]);
     Route::get('account/{user_id}', [accountController::class, "account"]);
 
+
     //properties
     Route::post('property/create', [propertiesController::class, "create"]);
     Route::get('account/properties/{account_id}', [propertiesController::class, "account_properties"]);
@@ -32,6 +33,7 @@ Route::group([
     Route::get('property/categories', [propertiesController::class, "get_categories"]);
     Route::post('properties/search', [propertiesController::class, "propertiesFilter"]);
 
+
     //Programing search
     Route::post('search/programing', [programingController::class, "save_programing_data"]);
     Route::get('programing/data', [programingController::class, "propertyProgramingSession"]);
@@ -39,11 +41,13 @@ Route::group([
     Route::post('property/programing/click', [programingController::class, "programing_search_click"]);
     Route::post('project/programing/save', [programingController::class, "projectProgramingSave"]);
 
+    
     //Devenir Agent
     Route::post('account/become/agent/data', [RealEstateAgentController::class, "save_become_Agent_data"]);
     // Route::get('test', [RealEstateAgentController::class, "become_real_state"]);
 
 });
+
 Route::get('localities', [LocalityController::class, "getList"])->name("localities.index");
 Route::post('localities/save', [LocalityController::class, "locality_save"])->name("localities.save");
 

@@ -34,96 +34,105 @@
             <div class="col-md-8">
                 {!! apply_filters('before_single_content_detail', null, $property) !!}
 
-                <div class="row pt-3">
-                    <div class="col-sm-12">
-                        <h5 class="headifhouse">{{ __('Overview') }}</h5>
-                        <div class="row py-2">
+                <div class="card mt-3">
+                    <div class="card-header fw-bold">
+                        {{ __('Overview') }}
+                    </div>
+                    <div class="card-body">
+                        <div class="row pt-3">
                             <div class="col-sm-12">
-                                <table class="table table-striped table-bordered">
-                                    @if ($property->categories()->count())
-                                        <tr>
-                                            <td>{{ __('Categorie') }}</td>
-                                            <td>
-                                                <strong>
-                                                    @foreach($property->categories()->get() as $category)
-                                                        <a href="{{ $category->url }}">{!! BaseHelper::clean($category->name) !!}</a>
-                                                        @if (! $loop->last)
-                                                            ,&nbsp;
-                                                        @endif
-                                                    @endforeach
-                                                </strong>
-                                            </td>
-                                        </tr>
-                                    @endif
-                                    @if ($property->square)
-                                        <tr>
-                                            <td>{{ __('Espace') }}</td>
-                                            <td><strong>{{ $property->square_text }}</strong></td>
-                                        </tr>
-                                    @endif
-                                    @if ($property->number_bedroom)
-                                        <tr>
-                                            <td>{{ __('Nombre de chambres') }}</td>
-                                            <td><strong>{{ number_format($property->number_bedroom) }}</strong></td>
-                                        </tr>
-                                    @endif
-                                    @if ($property->number_bathroom)
-                                        <tr>
-                                            <td>{{ __('Nombre de douches') }}</td>
-                                            <td><strong>{{ number_format($property->number_bathroom) }}</strong></td>
-                                        </tr>
-                                    @endif
-                                    @if ($property->number_floor)
-                                        <tr>
-                                            <td>{{ __('Nombre d\'étage') }}</td>
-                                            <td><strong>{{ number_format($property->number_floor) }}</strong></td>
-                                        </tr>
-                                    @endif
-                                    <tr>
-                                        <td>{{ __('Prix') }}</td>
-                                        <td><strong>{{ $property->price_html }}</strong></td>
-                                    </tr>
-                                    @foreach($property->customFields as $customField)
-                                        <tr>
-                                            <td>{!! BaseHelper::clean($customField->name) !!}</td>
-                                            <td><strong>{!! BaseHelper::clean($customField->value) !!}</strong></td>
-                                        </tr>
-                                    @endforeach
-                                    {!! apply_filters('property_details_extra_info', null, $property) !!}
-                                </table>
+                                <div class="row py-2">
+                                    <div class="col-sm-12">
+                                        <table class="table table-bordered">
+                                            @if ($property->categories()->count())
+                                                <tr>
+                                                    <td>{{ __('Categorie') }}</td>
+                                                    <td>
+                                                        <strong>
+                                                            @foreach($property->categories()->get() as $category)
+                                                                <a href="{{ $category->url }}">{!! BaseHelper::clean($category->name) !!}</a>
+                                                                @if (! $loop->last)
+                                                                    ,&nbsp;
+                                                                @endif
+                                                            @endforeach
+                                                        </strong>
+                                                    </td>
+                                                </tr>
+                                            @endif
+                                            @if ($property->square)
+                                                <tr>
+                                                    <td>{{ __('Espace') }}</td>
+                                                    <td><strong>{{ $property->square_text }}</strong></td>
+                                                </tr>
+                                            @endif
+                                            @if ($property->number_bedroom)
+                                                <tr>
+                                                    <td>{{ __('Nombre de chambres') }}</td>
+                                                    <td><strong>{{ number_format($property->number_bedroom) }}</strong></td>
+                                                </tr>
+                                            @endif
+                                            @if ($property->number_bathroom)
+                                                <tr>
+                                                    <td>{{ __('Nombre de douches') }}</td>
+                                                    <td><strong>{{ number_format($property->number_bathroom) }}</strong></td>
+                                                </tr>
+                                            @endif
+                                            @if ($property->number_floor)
+                                                <tr>
+                                                    <td>{{ __('Nombre d\'étage') }}</td>
+                                                    <td><strong>{{ number_format($property->number_floor) }}</strong></td>
+                                                </tr>
+                                            @endif
+                                            <tr>
+                                                <td>{{ __('Prix') }}</td>
+                                                <td><strong>{{ $property->price_html }}</strong></td>
+                                            </tr>
+                                            @foreach($property->customFields as $customField)
+                                                <tr>
+                                                    <td>{!! BaseHelper::clean($customField->name) !!}</td>
+                                                    <td><strong>{!! BaseHelper::clean($customField->value) !!}</strong></td>
+                                                </tr>
+                                            @endforeach
+                                            {!! apply_filters('property_details_extra_info', null, $property) !!}
+                                        </table>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
+
                 @if ($property->content)
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <h5 class="headifhouse">{{ __('Description') }}</h5>
-                            <div class="ck-content">
-                                {!! BaseHelper::clean($property->content) !!}
-                            </div>
+                    <div class="card mt-3">
+                        <div class="card-header fw-bold">
+                            {{ __('Description') }}
+                        </div>
+                        <div class="card-body text-justify">
+                            {!! BaseHelper::clean($property->content) !!}
                         </div>
                     </div>
                 @endif
                 @if ($property->features->count())
-                    <br>
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <h5 class="headifhouse">{{ __('Fonctionnalités') }}</h5>
+                    <div class="card mt-3">
+                        <div class="card-header fw-bold">
+                            {{ __('Fonctionnalités') }}
+                        </div>
+                        <div class="card-body">
                             <div class="row">
-                                @php $property->features->loadMissing('metadata'); @endphp
-                                @foreach($property->features as $feature)
-                                    <div class="col-sm-4">
-                                        @if ($feature->getMetaData('icon_image', true))
-                                            <p><i><img src="{{ RvMedia::getImageUrl($feature->getMetaData('icon_image', true)) }}" style="vertical-align: top; margin-top: 3px;" alt="{{ $feature->name }}" width="18" height="18"></i> {{ $feature->name }}</p>
-                                        @else
-                                            <p><i class="@if ($feature->icon) {{ $feature->icon }} @else fas fa-check @endif text-orange text0i"></i>  {{ $feature->name }}</p>
-                                        @endif
-                                    </div>
-                                @endforeach
+                            @php $property->features->loadMissing('metadata'); @endphp
+                            @foreach($property->features as $feature)
+                                <div class="col-sm-4">
+                                    @if ($feature->getMetaData('icon_image', true))
+                                        <p><i><img src="{{ RvMedia::getImageUrl($feature->getMetaData('icon_image', true)) }}" style="vertical-align: top; margin-top: 3px;" alt="{{ $feature->name }}" width="18" height="18"></i> {{ $feature->name }}</p>
+                                    @else
+                                        <p><i class="@if ($feature->icon) {{ $feature->icon }} @else fas fa-check @endif text-orange text0i"></i>  {{ $feature->name }}</p>
+                                    @endif
+                                </div>
+                            @endforeach
                             </div>
                         </div>
                     </div>
+                    <br>
                 @endif
                 <br>
                 @if ($property->facilities->count())
@@ -172,8 +181,9 @@
                         </div>
                     </div>
                 @endif
-                
-                @livewire("meeting.create")
+
+                <!-- findIndexShowProperty -->
+                @livewire("meeting.create",["agent"=>$property->author ,"property_id"=>$property->id])
                 
                 <br>
                 <!-- findIndexPropertyLongituteLatitude -->

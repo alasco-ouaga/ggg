@@ -1,7 +1,5 @@
 <?php
-
 // a traduire
-```php
 return [
     'login' => [
         'username' => 'Email/Nom d\'utilisateur',
@@ -69,4 +67,3 @@ return [
         ],
     ],
 ];
-```

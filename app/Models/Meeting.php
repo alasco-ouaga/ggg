@@ -18,6 +18,7 @@ class Meeting extends Model
         "agent_first_name",
         "agent_last_name",
         "account_id",
+        "property_id",
         "motif",
         "mode",
         "tool",

@@ -1,5 +1,4 @@
 <?php
-<?php
 
 return [
     'delete_user_logged_in' => 'Impossible de supprimer cet utilisateur. Cet utilisateur est connecté!',
